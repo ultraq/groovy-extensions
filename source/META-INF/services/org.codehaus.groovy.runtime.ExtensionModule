@@ -17,4 +17,4 @@
 moduleName = groovy-extensions
 moduleVersion = ${moduleVersion}
 extensionClasses = nz.net.ultraq.extensions.ObjectExtensions
-staticExtensionClasses = nz.net.ultraq.redhorizon.extensions.MathStaticExtensions
+staticExtensionClasses = nz.net.ultraq.extensions.MathStaticExtensions
