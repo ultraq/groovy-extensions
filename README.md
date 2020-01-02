@@ -36,10 +36,32 @@ value for the given key, then the `create` closure is executed and its return
 value is set on the object for the key, and returned to the calling code.
 
 ```groovy
-def myObject = map.getOrCreate('myKey') { ->
-  return new MyObject()
+assert !map['myKey']
+def result = map.getOrCreate('myKey') { ->
+  return 13
 }
+assert result == 13
+assert map['myKey'] == 13
 ```
+
+#### ExecutorService.executeAndShutdown(Closure closure)
+
+Execute the given closure, performing a shutdown after it has exited.  The
+executor is forcibly terminated after 5 seconds of being shut down (see:
+[shutdownAwaitTermination](#executorserviceshutdownawaittermination).)  Returns
+the result of the closure, if any.
+
+```groovy
+def executorService = Executors.newCachedThreadPool()
+executorService.executeAndShutdown { e ->
+  // Use the executorService within this closure
+}
+assert executorService.shutdown
+```
+
+### ExecutorService.shutdownAwaitTermination()
+
+Initiate a shutdown, waiting 5 seconds before forcing termination.
 
 ### Static methods
 
