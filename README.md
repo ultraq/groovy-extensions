@@ -46,8 +46,7 @@ assert map['myKey'] == 13
 
 #### ExecutorService.executeAndShutdown(Closure closure)
 
-Execute the given closure, performing a shutdown after it has exited.  The
-executor is forcibly terminated after 5 seconds of being shut down (see:
+Execute the given closure, performing a shutdown after it has exited (see:
 [shutdownAwaitTermination](#executorserviceshutdownawaittermination).)  Returns
 the result of the closure, if any.
 

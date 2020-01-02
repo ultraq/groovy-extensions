@@ -27,8 +27,7 @@ import java.util.concurrent.TimeUnit
 class ExecutorServiceExtensions {
 
 	/**
-	 * Execute the given closure, performing a shutdown after it has exited.  The
-	 * executor is forcibly terminated after 5 seconds of being shut down (see
+	 * Execute the given closure, performing a shutdown after it has exited (see
 	 * {@link #shutdownAwaitTermination}).
 	 * 
 	 * @param <T>
