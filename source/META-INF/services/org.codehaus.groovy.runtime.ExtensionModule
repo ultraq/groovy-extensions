@@ -16,6 +16,7 @@
 
 moduleName = groovy-extensions
 moduleVersion = ${moduleVersion}
-extensionClasses = nz.net.ultraq.extensions.ObjectExtensions,\
-                   nz.net.ultraq.extensions.ExecutorServiceExtensions
+extensionClasses = nz.net.ultraq.extensions.ExecutorServiceExtensions,\
+                   nz.net.ultraq.extensions.MapExtensions,\
+                   nz.net.ultraq.extensions.ObjectExtensions
 staticExtensionClasses = nz.net.ultraq.extensions.MathStaticExtensions

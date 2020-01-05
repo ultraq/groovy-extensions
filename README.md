@@ -36,13 +36,19 @@ value for the given key, then the `create` closure is executed and its return
 value is set on the object for the key, and returned to the calling code.
 
 ```groovy
-assert !map['myKey']
-def result = map.getOrCreate('myKey') { ->
+assert !myObject['someProperty']
+def result = map.getOrCreate('someProperty') { ->
   return 13
 }
 assert result == 13
-assert map['myKey'] == 13
+assert myObject['someProperty'] == 13
 ```
+
+#### Map.getOrCreate(Object key, Closure create)
+
+Very similar to Groovy's `Map.get(Object key, Object defaultValue)` method, but
+allows the default value to be created in a closure, similar to
+[Object.getOrCreate()](#objectgetorcreatestring-key-closure-create).
 
 #### ExecutorService.executeAndShutdown(Closure closure)
 

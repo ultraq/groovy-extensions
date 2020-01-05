@@ -19,25 +19,22 @@ package nz.net.ultraq.extensions
 import spock.lang.Specification
 
 /**
- * Tests for instance methods on the {@code Object} class.
- * 
+ * Tests for instance methods on the {@code Map} class.
+ *
  * @author Emanuel Rabina
  */
-class ObjectExtensionsTests extends Specification {
+class MapExtensionsTests extends Specification {
 
-	private static class ObjectTest {
-		String message
-	}
-
-	def "Sets and returns the result on the object"() {
+	def "Sets and returns the result on the map"() {
 		given:
-			def obj = new ObjectTest()
+			def map = [:]
+			def key = new Object()
 		when:
-			def value = obj.getOrCreate('message') { ->
+			def value = map.getOrCreate(key) { ->
 				return 'Hi!'
 			}
 		then:
 			value == 'Hi!'
-			obj['message'] == 'Hi!'
+			map[key] == 'Hi!'
 	}
 }
