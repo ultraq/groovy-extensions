@@ -16,6 +16,8 @@
 
 package nz.net.ultraq.extensions
 
+import groovy.transform.stc.ClosureParams
+import groovy.transform.stc.SimpleType
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.TimeUnit
 
@@ -38,7 +40,9 @@ class ExecutorServiceExtensions {
 	 * @return
 	 *   The return value from the closure.
 	 */
-	static <T> T executeAndShutdown(ExecutorService self, Closure<T> closure) {
+	static <T> T executeAndShutdown(ExecutorService self,
+		@ClosureParams(value = SimpleType, options = 'java.util.concurrent.ExecutorService')
+		Closure<T> closure) {
 
 		try {
 			return closure(self)
