@@ -64,7 +64,7 @@ executorService.executeAndShutdown { e ->
 assert executorService.shutdown
 ```
 
-### ExecutorService.shutdownAwaitTermination(int awaitValue = 5, TimeUnit awaitUnit = TimeUnit.SECONDS)
+#### ExecutorService.shutdownAwaitTermination(int awaitValue = 5, TimeUnit awaitUnit = TimeUnit.SECONDS)
 
 Initiate a shutdown, waiting the specified amount of time before forcing
 termination.
