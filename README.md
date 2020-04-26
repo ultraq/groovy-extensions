@@ -50,11 +50,11 @@ Very similar to Groovy's `Map.get(Object key, Object defaultValue)` method, but
 allows the default value to be created in a closure, similar to
 [Object.getOrCreate()](#objectgetorcreatestring-key-closure-create).
 
-#### ExecutorService.executeAndShutdown(Closure closure)
+#### ExecutorService.executeAndShutdown(int awaitValue = 5, TimeUnit awaitUnit = TimeUnit.SECONDS, Closure closure)
 
 Execute the given closure, performing a shutdown after it has exited (see:
-[shutdownAwaitTermination](#executorserviceshutdownawaittermination).)  Returns
-the result of the closure, if any.
+[shutdownAwaitTermination](#executorserviceshutdownawaitterminationint-awaitvalue--5-timeunit-awaitunit--timeunitseconds).)
+Returns the result of the closure, if any.
 
 ```groovy
 def executorService = Executors.newCachedThreadPool()
@@ -64,9 +64,10 @@ executorService.executeAndShutdown { e ->
 assert executorService.shutdown
 ```
 
-### ExecutorService.shutdownAwaitTermination()
+### ExecutorService.shutdownAwaitTermination(int awaitValue = 5, TimeUnit awaitUnit = TimeUnit.SECONDS)
 
-Initiate a shutdown, waiting 5 seconds before forcing termination.
+Initiate a shutdown, waiting the specified amount of time before forcing
+termination.
 
 ### Static methods
 

@@ -30,37 +30,42 @@ class ExecutorServiceExtensions {
 
 	/**
 	 * Execute the given closure, performing a shutdown after it has exited (see
-	 * {@link #shutdownAwaitTermination}).
+	 * {@link #shutdownAwaitTermination(ExecutorService, int, TimeUnit)}).
 	 * 
 	 * @param <T>
 	 * @param self
+	 * @param awaitValue
+	 * @param awaitUnit
 	 * @param closure
 	 *   Called within the context of a try/finally block with the executor
 	 *   service itself for performing any parallel tasks.
 	 * @return
 	 *   The return value from the closure.
 	 */
-	static <T> T executeAndShutdown(ExecutorService self,
+	static <T> T executeAndShutdown(ExecutorService self, int awaitValue = 5, TimeUnit awaitUnit = TimeUnit.SECONDS,
 		@ClosureParams(value = SimpleType, options = 'java.util.concurrent.ExecutorService')
-		Closure<T> closure) {
+			Closure<T> closure) {
 
 		try {
 			return closure(self)
 		}
 		finally {
-			self.shutdownAwaitTermination()
+			self.shutdownAwaitTermination(awaitValue, awaitUnit)
 		}
 	}
 
 	/**
-	 * Initiate a shutdown, waiting 5 seconds before forcing termination.
+	 * Initiate a shutdown, waiting the specified amount of time before forcing
+	 * termination.
 	 * 
 	 * @param self
+	 * @param awaitValue
+	 * @param awaitUnit
 	 */
-	static void shutdownAwaitTermination(ExecutorService self) {
+	static void shutdownAwaitTermination(ExecutorService self, int awaitValue = 5, TimeUnit awaitUnit = TimeUnit.SECONDS) {
 
 		self.shutdown()
-		if (!self.awaitTermination(5, TimeUnit.SECONDS)) {
+		if (!self.awaitTermination(awaitValue, awaitUnit)) {
 			self.shutdownNow()
 		}
 	}
