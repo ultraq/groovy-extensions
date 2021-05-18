@@ -34,10 +34,10 @@ year     = '2020'
 
 dependencies {
 	implementation(
-		'org.codehaus.groovy:groovy:3.0.7'
+		'org.codehaus.groovy:groovy:3.0.8'
 	)
 	testImplementation(
-		'org.spockframework:spock-core:2.0-M2-groovy-3.0'
+		'org.spockframework:spock-core:2.0-groovy-3.0'
 	)
 }
 
