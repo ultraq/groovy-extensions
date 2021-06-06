@@ -2,7 +2,7 @@
 Groovy Extensions
 =================
 
-[![Build Status](https://travis-ci.com/ultraq/groovy-extensions.svg)](https://travis-ci.com/ultraq/groovy-extensions)
+[![Build Status](https://github.com/ultraq/groovy-extensions/actions/workflows/build.yml/badge.svg)](https://github.com/ultraq/groovy-extensions/actions)
 [![Coverage Status](https://coveralls.io/repos/github/ultraq/groovy-extensions/badge.svg?branch=main)](https://coveralls.io/github/ultraq/groovy-extensions?branch=main)
 [![Maven Central](https://img.shields.io/maven-central/v/nz.net.ultraq.extensions/groovy-extensions.svg?maxAge=3600)](http://search.maven.org/#search|ga|1|g%3A%22nz.net.ultraq.extensions%22%20AND%20a%3A%22groovy-extensions%22)
 
