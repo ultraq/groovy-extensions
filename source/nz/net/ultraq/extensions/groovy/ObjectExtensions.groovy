@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.extensions
+package nz.net.ultraq.extensions.groovy
 
 /**
  * Extensions to the base {@code Object} class.

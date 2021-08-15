@@ -14,27 +14,29 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.extensions
+package nz.net.ultraq.extensions.groovy
 
 import spock.lang.Specification
 
+import java.util.concurrent.ExecutorService
+
 /**
- * Tests for instance methods on the {@code Map} class.
- *
+ * Tests for the extension methods to {@code ExecutorService} instances.
+ * 
  * @author Emanuel Rabina
  */
-class MapExtensionsTests extends Specification {
+class ExecutorServiceExtensionsTests extends Specification {
 
-	def "Sets and returns the result on the map"() {
+	def "Invokes the closure, passing itself as a parameter, before shutting down"() {
 		given:
-			def map = [:]
-			def key = new Object()
+			def executorService = Mock(ExecutorService)
+			def closureParam = null
 		when:
-			def value = map.getOrCreate(key) { ->
-				return 'Hi!'
+			executorService.executeAndShutdown {
+				closureParam = it
 			}
 		then:
-			value == 'Hi!'
-			map[key] == 'Hi!'
+			closureParam == executorService
+			1 * executorService.shutdown()
 	}
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.extensions
+package nz.net.ultraq.extensions.groovy
 
 /**
  * Static method extensions to the {@code Math} class.
