@@ -3,7 +3,7 @@ Groovy Extensions
 =================
 
 [![Build Status](https://github.com/ultraq/groovy-extensions/actions/workflows/build.yml/badge.svg)](https://github.com/ultraq/groovy-extensions/actions)
-[![Coverage Status](https://coveralls.io/repos/github/ultraq/groovy-extensions/badge.svg?branch=main)](https://coveralls.io/github/ultraq/groovy-extensions?branch=main)
+[![codecov](https://codecov.io/gh/ultraq/groovy-extensions/branch/main/graph/badge.svg?token=IIV5XF3B1L)](https://codecov.io/gh/ultraq/groovy-extensions)
 [![Maven Central](https://img.shields.io/maven-central/v/nz.net.ultraq.extensions/groovy-extensions.svg?maxAge=3600)](http://search.maven.org/#search|ga|1|g%3A%22nz.net.ultraq.extensions%22%20AND%20a%3A%22groovy-extensions%22)
 
 A collection of extensions for Groovy projects that I almost wish were a part of
