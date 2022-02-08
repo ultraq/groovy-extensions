@@ -39,12 +39,6 @@ dependencies {
 	}
 }
 
-processResources {
-	expand([
-		moduleVersion: version
-	])
-}
-
 test {
 	useJUnitPlatform()
 }
