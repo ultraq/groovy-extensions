@@ -31,12 +31,9 @@ group = 'nz.net.ultraq.extensions'
 year = '2020'
 
 dependencies {
-	implementation(
-		'org.apache.groovy:groovy:4.0.0'
-	)
-	testImplementation('org.spockframework:spock-core:2.1-groovy-3.0-SNAPSHOT') {
-		exclude module: 'groovy'
-	}
+	implementation 'org.apache.groovy:groovy:4.0.0'
+
+	testImplementation 'org.spockframework:spock-core:2.2-M1-groovy-4.0'
 }
 
 test {
