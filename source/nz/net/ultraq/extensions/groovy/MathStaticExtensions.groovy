@@ -50,4 +50,20 @@ class MathStaticExtensions {
 
 		return Math.min(Math.max(lower, value), upper)
 	}
+
+	/**
+	 * Wrap a {@code float} value within a certain range.
+	 * 
+	 * @param self
+	 * @param value
+	 * @param lower
+	 * @param upper
+	 * @return
+	 */
+	static float wrap(Math self, float value, float lower, float upper) {
+
+		return value < lower ? wrap(self, upper - (lower - value) as float, lower, upper) :
+		       value > upper ? wrap(self, lower + (value - upper) as float, lower, upper) :
+		       value
+	}
 }
