@@ -17,6 +17,7 @@
 moduleName = groovy-extensions
 moduleVersion = ${moduleVersion}
 extensionClasses = nz.net.ultraq.extensions.groovy.BlockingQueueExtensions,\
+                   nz.net.ultraq.extensions.groovy.ByteArrayExtensions,\
                    nz.net.ultraq.extensions.groovy.ByteBufferExtensions,\
                    nz.net.ultraq.extensions.groovy.ExecutorServiceExtensions,\
                    nz.net.ultraq.extensions.groovy.MapExtensions,\
