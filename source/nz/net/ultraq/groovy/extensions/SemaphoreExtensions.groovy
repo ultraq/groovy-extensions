@@ -14,42 +14,32 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.extensions.groovy
+package nz.net.ultraq.groovy.extensions
 
-import java.util.concurrent.BlockingQueue
+import java.util.concurrent.Semaphore
 
 /**
- * Extensions to the {@link BlockingQueue} interface.
+ * Extension methods for the Semaphore concurrency utility.
  * 
  * @author Emanuel Rabina
  */
-class BlockingQueueExtensions {
+class SemaphoreExtensions {
 
 	/**
-	 * Drains all available elements to a new list which is returned.
+	 * Acquire and release a single permit around the given closure.
 	 * 
 	 * @param self
+	 * @param closure
 	 * @return
 	 */
-	static <E> List<E> drain(BlockingQueue<E> self) {
+	static <T> T acquireAndRelease(Semaphore self, Closure<T> closure) {
 
-		def remaining = []
-		self.drainTo(remaining)
-		return remaining
-	}
-
-	/**
-	 * Drain at most the given number of elements into a new list which is
-	 * returned.
-	 * 
-	 * @param self
-	 * @param maxElements
-	 * @return
-	 */
-	static <E> List<E> drain(BlockingQueue<E> self, int maxElements) {
-
-		def elements = []
-		self.drainTo(elements, maxElements)
-		return elements
+		try {
+			self.acquire()
+			return closure()
+		}
+		finally {
+			self.release()
+		}
 	}
 }

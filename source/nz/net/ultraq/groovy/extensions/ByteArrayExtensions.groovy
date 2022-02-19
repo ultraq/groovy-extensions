@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.extensions.groovy
-
-import spock.lang.Specification
+package nz.net.ultraq.groovy.extensions
 
 /**
- * Tests for instance methods on the {@code Map} class.
- *
+ * Extensions for {@code byte} arrays.
+ * 
  * @author Emanuel Rabina
  */
-class MapExtensionsTests extends Specification {
+class ByteArrayExtensions {
 
-	def "Sets and returns the result on the map"() {
-		given:
-			def map = [:]
-			def key = new Object()
-		when:
-			def value = map.getOrCreate(key) { ->
-				return 'Hi!'
-			}
-		then:
-			value == 'Hi!'
-			map[key] == 'Hi!'
+	/**
+	 * Return a new array of the items in this array but in reverse order.
+	 * 
+	 * @param self
+	 * @return
+	 */
+	static byte[] reverse(byte[] self) {
+
+		byte[] reversed = new byte[self.length]
+		for (int i = 0; i < self.length; i++) {
+			reversed[i] = self[self.length - 1 - i]
+		}
+		return reversed
 	}
 }

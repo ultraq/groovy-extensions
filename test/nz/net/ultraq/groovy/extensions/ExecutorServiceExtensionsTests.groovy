@@ -14,30 +14,29 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.extensions.groovy
+package nz.net.ultraq.groovy.extensions
 
 import spock.lang.Specification
 
+import java.util.concurrent.ExecutorService
+
 /**
- * Tests for instance methods on the {@code Object} class.
+ * Tests for the extension methods to {@code ExecutorService} instances.
  * 
  * @author Emanuel Rabina
  */
-class ObjectExtensionsTests extends Specification {
+class ExecutorServiceExtensionsTests extends Specification {
 
-	private static class ObjectTest {
-		String message
-	}
-
-	def "Sets and returns the result on the object"() {
+	def "Invokes the closure, passing itself as a parameter, before shutting down"() {
 		given:
-			def obj = new ObjectTest()
+			def executorService = Mock(ExecutorService)
+			def closureParam = null
 		when:
-			def value = obj.getOrCreate('message') { ->
-				return 'Hi!'
+			executorService.executeAndShutdown {
+				closureParam = it
 			}
 		then:
-			value == 'Hi!'
-			obj['message'] == 'Hi!'
+			closureParam == executorService
+			1 * executorService.shutdown()
 	}
 }

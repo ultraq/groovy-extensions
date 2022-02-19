@@ -16,13 +16,13 @@
 
 moduleName = groovy-extensions
 moduleVersion = ${moduleVersion}
-extensionClasses = nz.net.ultraq.extensions.groovy.BlockingQueueExtensions,\
-                   nz.net.ultraq.extensions.groovy.ByteArrayExtensions,\
-                   nz.net.ultraq.extensions.groovy.ByteBufferExtensions,\
-                   nz.net.ultraq.extensions.groovy.ExecutorServiceExtensions,\
-                   nz.net.ultraq.extensions.groovy.MapExtensions,\
-                   nz.net.ultraq.extensions.groovy.ObjectExtensions,\
-                   nz.net.ultraq.extensions.groovy.SemaphoreExtensions,\
-                   nz.net.ultraq.extensions.groovy.ShortBufferExtensions
-staticExtensionClasses = nz.net.ultraq.extensions.groovy.ByteBufferStaticExtensions,\
-                         nz.net.ultraq.extensions.groovy.MathStaticExtensions
+extensionClasses = nz.net.ultraq.groovy.extensions.BlockingQueueExtensions,\
+                   nz.net.ultraq.groovy.extensions.ByteArrayExtensions,\
+                   nz.net.ultraq.groovy.extensions.ByteBufferExtensions,\
+                   nz.net.ultraq.groovy.extensions.ExecutorServiceExtensions,\
+                   nz.net.ultraq.groovy.extensions.MapExtensions,\
+                   nz.net.ultraq.groovy.extensions.ObjectExtensions,\
+                   nz.net.ultraq.groovy.extensions.SemaphoreExtensions,\
+                   nz.net.ultraq.groovy.extensions.ShortBufferExtensions
+staticExtensionClasses = nz.net.ultraq.groovy.extensions.ByteBufferStaticExtensions,\
+                         nz.net.ultraq.groovy.extensions.MathStaticExtensions

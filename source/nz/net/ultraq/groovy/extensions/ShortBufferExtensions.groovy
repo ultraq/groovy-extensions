@@ -14,30 +14,27 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.extensions.groovy
+package nz.net.ultraq.groovy.extensions
 
-import spock.lang.Specification
+import java.nio.ShortBuffer
 
 /**
- * Tests for the static extension methods to the {@code Math} class.
+ * Instance method extensions to the {@code ShortBuffer} class.
  * 
  * @author Emanuel Rabina
  */
-class MathStaticExtensionsTests extends Specification {
+class ShortBufferExtensions {
 
-	def "Clamps int values to the specified range"(int value) {
-		expect:
-			Math.clamp(value, 0, 10) >= 0
-			Math.clamp(value, 0, 10) <= 10
-		where:
-			value << [5, -3, 22]
-	}
+	/**
+	 * Advance the internal position of a buffer by the given amount.  Negative
+	 * values may be given to move the position backwards.
+	 * 
+	 * @param self
+	 * @param n
+	 * @return The buffer.
+	 */
+	static ShortBuffer advance(ShortBuffer self, int n) {
 
-	def "Clamps float values to the specified range"(float value) {
-		expect:
-			Math.clamp(value, 0f, 10f) >= 0f
-			Math.clamp(value, 0f, 10f) <= 10f
-		where:
-			value << [1.5f, -3.2f, 22f]
+		return self.position(self.position() + n)
 	}
 }

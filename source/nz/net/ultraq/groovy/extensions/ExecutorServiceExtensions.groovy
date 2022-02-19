@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.extensions.groovy
+package nz.net.ultraq.groovy.extensions
 
 import groovy.transform.stc.ClosureParams
 import groovy.transform.stc.SimpleType

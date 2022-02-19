@@ -14,27 +14,30 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.extensions.groovy
+package nz.net.ultraq.groovy.extensions
 
-import java.nio.ShortBuffer
+import spock.lang.Specification
 
 /**
- * Instance method extensions to the {@code ShortBuffer} class.
+ * Tests for instance methods on the {@code Object} class.
  * 
  * @author Emanuel Rabina
  */
-class ShortBufferExtensions {
+class ObjectExtensionsTests extends Specification {
 
-	/**
-	 * Advance the internal position of a buffer by the given amount.  Negative
-	 * values may be given to move the position backwards.
-	 * 
-	 * @param self
-	 * @param n
-	 * @return The buffer.
-	 */
-	static ShortBuffer advance(ShortBuffer self, int n) {
+	private static class ObjectTest {
+		String message
+	}
 
-		return self.position(self.position() + n)
+	def "Sets and returns the result on the object"() {
+		given:
+			def obj = new ObjectTest()
+		when:
+			def value = obj.getOrCreate('message') { ->
+				return 'Hi!'
+			}
+		then:
+			value == 'Hi!'
+			obj['message'] == 'Hi!'
 	}
 }

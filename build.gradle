@@ -27,7 +27,7 @@ apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/main/maven-
 description = 'A collection of extensions for Groovy projects that I almost wish were a part of the GDK'
 version = '2.0.0-SNAPSHOT'
 sourceCompatibility = 1.8
-group = 'nz.net.ultraq.extensions'
+group = 'nz.net.ultraq.groovy'
 year = '2020'
 
 dependencies {
@@ -42,6 +42,6 @@ test {
 
 jar {
 	manifest {
-		attributes('Automatic-Module-Name': 'nz.net.ultraq.extensions.groovy')
+		attributes('Automatic-Module-Name': 'nz.net.ultraq.groovy.extensions')
 	}
 }

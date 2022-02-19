@@ -14,27 +14,30 @@
  * limitations under the License.
  */
 
-package nz.net.ultraq.extensions.groovy
+package nz.net.ultraq.groovy.extensions
+
+import spock.lang.Specification
 
 /**
- * Extensions for {@code byte} arrays.
+ * Tests for the static extension methods to the {@code Math} class.
  * 
  * @author Emanuel Rabina
  */
-class ByteArrayExtensions {
+class MathStaticExtensionsTests extends Specification {
 
-	/**
-	 * Return a new array of the items in this array but in reverse order.
-	 * 
-	 * @param self
-	 * @return
-	 */
-	static byte[] reverse(byte[] self) {
+	def "Clamps int values to the specified range"(int value) {
+		expect:
+			Math.clamp(value, 0, 10) >= 0
+			Math.clamp(value, 0, 10) <= 10
+		where:
+			value << [5, -3, 22]
+	}
 
-		byte[] reversed = new byte[self.length]
-		for (int i = 0; i < self.length; i++) {
-			reversed[i] = self[self.length - 1 - i]
-		}
-		return reversed
+	def "Clamps float values to the specified range"(float value) {
+		expect:
+			Math.clamp(value, 0f, 10f) >= 0f
+			Math.clamp(value, 0f, 10f) <= 10f
+		where:
+			value << [1.5f, -3.2f, 22f]
 	}
 }
