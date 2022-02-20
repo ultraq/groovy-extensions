@@ -31,6 +31,13 @@ class ExecutorServiceExtensions {
 	/**
 	 * Execute the given closure, performing a shutdown after it has exited (see
 	 * {@link #shutdownAwaitTermination(ExecutorService, int, TimeUnit)}).
+	 * <pre>
+	 *   def executorService = Executors.newCachedThreadPool()
+	 *   executorService.executeAndShutdown { e ->
+	 *     // Use the executorService within this closure
+	 *   }
+	 *   assert executorService.shutdown
+	 * </pre>
 	 * 
 	 * @param <T>
 	 * @param self
@@ -39,8 +46,7 @@ class ExecutorServiceExtensions {
 	 * @param closure
 	 *   Called within the context of a try/finally block with the executor
 	 *   service itself for performing any parallel tasks.
-	 * @return
-	 *   The return value from the closure.
+	 * @return The return value from the closure.
 	 */
 	static <T> T executeAndShutdown(ExecutorService self, int awaitValue = 5, TimeUnit awaitUnit = TimeUnit.SECONDS,
 		@ClosureParams(value = SimpleType, options = 'java.util.concurrent.ExecutorService')

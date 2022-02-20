@@ -29,6 +29,14 @@ class ObjectExtensions {
 	 * methods).  If there is no value for the given key, then the {@code create}
 	 * closure is executed and its return value is set on the object for the key,
 	 * and returned to the calling code.
+	 * <pre>
+	 *   assert !myObject['someProperty']
+	 *   def result = map.getOrCreate('someProperty') { ->
+	 *     return 13
+	 *   }
+	 *   assert result == 13
+	 *   assert myObject['someProperty'] == 13
+	 * </pre>
 	 * 
 	 * @param <T>
 	 * @param self
