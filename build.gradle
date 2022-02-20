@@ -20,8 +20,8 @@ plugins {
 	id 'maven-publish'
 	id 'idea'
 }
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/main/gradle-support.gradle'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/main/maven-publish-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.0.1/gradle-support.gradle'
+apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.0.1/maven-publish-support.gradle'
 
 description = 'A collection of extensions for Groovy projects that I almost wish were a part of the GDK'
 version = '2.0.0-SNAPSHOT'
