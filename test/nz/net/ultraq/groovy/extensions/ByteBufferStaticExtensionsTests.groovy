@@ -33,6 +33,19 @@ class ByteBufferStaticExtensionsTests extends Specification {
 			ByteBuffer.allocateNative(8).order() == ByteOrder.nativeOrder()
 	}
 
+	def "fromBuffers combines data from several buffers"() {
+		given:
+			def buffer1 = ByteBuffer.wrapNative([1, 2, 3] as byte[])
+			def buffer2 = ByteBuffer.wrapNative([4, 5, 6] as byte[])
+		when:
+			def result = ByteBuffer.fromBuffers(buffer1, buffer2)
+		then:
+			result.position() == 0
+			result.array() == [1, 2, 3, 4, 5, 6] as byte[]
+			buffer1.position() == 3 // The inputs are advanced
+			buffer2.position() == 3
+	}
+
 	def "wrapNative returns a natively ordered buffer"() {
 		expect:
 			ByteBuffer.wrapNative([0x0f] as byte[]).order() == ByteOrder.nativeOrder()

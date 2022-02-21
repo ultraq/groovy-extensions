@@ -1,5 +1,5 @@
 /* 
- * Copyright 2020, Emanuel Rabina (http://www.ultraq.net.nz/)
+ * Copyright 2022, Emanuel Rabina (http://www.ultraq.net.nz/)
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,35 +19,14 @@ package nz.net.ultraq.groovy.extensions
 import spock.lang.Specification
 
 /**
- * Tests for instance methods on the {@code Map} class.
- *
+ * Tests for the {@link ByteArrayExtensions} methods.
+ * 
  * @author Emanuel Rabina
  */
-class MapExtensionsTests extends Specification {
+class ByteArrayExtensionsTests extends Specification {
 
-	def "Sets and returns the result on the map"() {
-		given:
-			def map = [:]
-			def key = new Object()
-		when:
-			def value = map.getOrCreate(key) { ->
-				return 'Hi!'
-			}
-		then:
-			value == 'Hi!'
-			map[key] == 'Hi!'
-	}
-
-	def "If the key already exists, return its value"() {
-		given:
-			def key = 'key'
-			def value = 'Hello!'
-			def map = [(key): value]
-		when:
-			def result = map.getOrCreate(key) { ->
-				return 'Goodbye!'
-			}
-		then:
-			result == value
+	def "Returns an array of the input reversed"() {
+		expect:
+			([1, 2, 3] as byte[]).reverse() == [3, 2, 1] as byte[]
 	}
 }

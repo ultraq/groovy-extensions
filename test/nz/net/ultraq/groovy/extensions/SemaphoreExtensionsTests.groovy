@@ -1,5 +1,5 @@
 /* 
- * Copyright 2020, Emanuel Rabina (http://www.ultraq.net.nz/)
+ * Copyright 2022, Emanuel Rabina (http://www.ultraq.net.nz/)
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,36 +18,23 @@ package nz.net.ultraq.groovy.extensions
 
 import spock.lang.Specification
 
+import java.util.concurrent.Semaphore
+
 /**
- * Tests for instance methods on the {@code Map} class.
- *
+ * Tests for the {@link SemaphoreExtensions} methods.
+ * 
  * @author Emanuel Rabina
  */
-class MapExtensionsTests extends Specification {
+class SemaphoreExtensionsTests extends Specification {
 
-	def "Sets and returns the result on the map"() {
-		given:
-			def map = [:]
-			def key = new Object()
-		when:
-			def value = map.getOrCreate(key) { ->
-				return 'Hi!'
+	def "Acquires the semaphore, executes the closure, then releases the semaphore"() {
+		expect:
+			def semaphore = new Semaphore(1)
+			def result = semaphore.acquireAndRelease { ->
+				assert !semaphore.tryAcquire()
+				return 'Hello!'
 			}
-		then:
-			value == 'Hi!'
-			map[key] == 'Hi!'
-	}
-
-	def "If the key already exists, return its value"() {
-		given:
-			def key = 'key'
-			def value = 'Hello!'
-			def map = [(key): value]
-		when:
-			def result = map.getOrCreate(key) { ->
-				return 'Goodbye!'
-			}
-		then:
-			result == value
+			assert semaphore.tryAcquire()
+			result == 'Hello!'
 	}
 }

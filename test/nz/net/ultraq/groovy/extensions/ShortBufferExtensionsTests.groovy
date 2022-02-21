@@ -1,5 +1,5 @@
 /* 
- * Copyright 2020, Emanuel Rabina (http://www.ultraq.net.nz/)
+ * Copyright 2022, Emanuel Rabina (http://www.ultraq.net.nz/)
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,36 +18,22 @@ package nz.net.ultraq.groovy.extensions
 
 import spock.lang.Specification
 
+import java.nio.ShortBuffer
+
 /**
- * Tests for instance methods on the {@code Map} class.
- *
+ * Tests for the {@link ShortBufferExtensions} methods.
+ * 
  * @author Emanuel Rabina
  */
-class MapExtensionsTests extends Specification {
+class ShortBufferExtensionsTests extends Specification {
 
-	def "Sets and returns the result on the map"() {
+	def "Moves the buffer position ahead by the given amount"() {
 		given:
-			def map = [:]
-			def key = new Object()
+			def buffer = ShortBuffer.allocate(100)
+			buffer.position(5)
 		when:
-			def value = map.getOrCreate(key) { ->
-				return 'Hi!'
-			}
+			buffer.advance(10)
 		then:
-			value == 'Hi!'
-			map[key] == 'Hi!'
-	}
-
-	def "If the key already exists, return its value"() {
-		given:
-			def key = 'key'
-			def value = 'Hello!'
-			def map = [(key): value]
-		when:
-			def result = map.getOrCreate(key) { ->
-				return 'Goodbye!'
-			}
-		then:
-			result == value
+			buffer.position() == 15
 	}
 }

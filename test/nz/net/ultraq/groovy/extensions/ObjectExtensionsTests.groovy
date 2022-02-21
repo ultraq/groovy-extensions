@@ -31,13 +31,27 @@ class ObjectExtensionsTests extends Specification {
 
 	def "Sets and returns the result on the object"() {
 		given:
+			def key = 'message'
 			def obj = new ObjectTest()
 		when:
-			def value = obj.getOrCreate('message') { ->
+			def value = obj.getOrCreate(key) { ->
 				return 'Hi!'
 			}
 		then:
 			value == 'Hi!'
-			obj['message'] == 'Hi!'
+			obj[key] == 'Hi!'
+	}
+
+	def "If the property already exists, return its value"() {
+		given:
+			def property = 'message'
+			def obj = new ObjectTest()
+			obj[property] = 'Hello!'
+		when:
+			def result = obj.getOrCreate(property) { ->
+				return 'Goodbye!'
+			}
+		then:
+			result == 'Hello!'
 	}
 }

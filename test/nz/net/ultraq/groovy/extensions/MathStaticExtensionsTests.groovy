@@ -40,4 +40,12 @@ class MathStaticExtensionsTests extends Specification {
 		where:
 			value << [1.5f, -3.2f, 22f]
 	}
+
+	def "Wraps values to the specified range"(float value) {
+		expect:
+			Math.wrap(value, 0, 10) >= 0
+			Math.wrap(value, 0, 10) <= 10
+		where:
+			value << [1.5f, -3.2f, 22f]
+	}
 }
