@@ -33,7 +33,9 @@ class ObjectStaticExtensions {
 	 * @param closure
 	 * @return
 	 */
-	static <T> T with(Object self, Class delegate, Closure<T> closure) {
+	static <T> T with(Object self, @DelegatesTo.Target Class delegate,
+		@DelegatesTo(strategy = Closure.DELEGATE_FIRST)
+		Closure<T> closure) {
 
 		closure.resolveStrategy = Closure.DELEGATE_FIRST
 		closure.delegate = delegate
