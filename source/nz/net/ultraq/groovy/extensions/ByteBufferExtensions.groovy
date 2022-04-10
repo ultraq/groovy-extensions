@@ -16,6 +16,8 @@
 
 package nz.net.ultraq.groovy.extensions
 
+import groovy.transform.stc.ClosureParams
+import groovy.transform.stc.SimpleType
 import java.nio.ByteBuffer
 
 /**
@@ -36,6 +38,28 @@ class ByteBufferExtensions {
 	static ByteBuffer advance(ByteBuffer self, int n) {
 
 		return self.position(self.position() + n)
+	}
+
+	/**
+	 * Convenience method for calling {@link ByteBuffer#mark}, executing the
+	 * closure, and then calling {@link ByteBuffer#reset} before returning.
+	 *
+	 * @param self
+	 * @param readLimit
+	 * @param closure
+	 * @return
+	 */
+	static <T> T markAndReset(ByteBuffer self,
+		@ClosureParams(value = SimpleType, options = "java.lang.ByteBuffer") Closure<T> closure) {
+
+		try {
+			self.mark()
+			def result = closure(self)
+			return result
+		}
+		finally {
+			self.reset()
+		}
 	}
 
 	/**

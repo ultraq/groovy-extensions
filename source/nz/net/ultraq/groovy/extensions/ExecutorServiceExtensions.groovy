@@ -50,7 +50,7 @@ class ExecutorServiceExtensions {
 	 */
 	static <T> T executeAndShutdown(ExecutorService self, int awaitValue = 5, TimeUnit awaitUnit = TimeUnit.SECONDS,
 		@ClosureParams(value = SimpleType, options = 'java.util.concurrent.ExecutorService')
-			Closure<T> closure) {
+		Closure<T> closure) {
 
 		try {
 			return closure(self)
