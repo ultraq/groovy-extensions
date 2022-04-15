@@ -20,6 +20,7 @@ extensionClasses = nz.net.ultraq.groovy.extensions.BlockingQueueExtensions,\
                    nz.net.ultraq.groovy.extensions.ByteArrayExtensions,\
                    nz.net.ultraq.groovy.extensions.ByteBufferExtensions,\
                    nz.net.ultraq.groovy.extensions.ExecutorServiceExtensions,\
+                   nz.net.ultraq.groovy.extensions.FutureExtensions,\
                    nz.net.ultraq.groovy.extensions.MapExtensions,\
                    nz.net.ultraq.groovy.extensions.ObjectExtensions,\
                    nz.net.ultraq.groovy.extensions.SemaphoreExtensions,\
