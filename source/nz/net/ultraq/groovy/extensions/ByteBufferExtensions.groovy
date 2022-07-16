@@ -41,6 +41,19 @@ class ByteBufferExtensions {
 	}
 
 	/**
+	 * An alias for {@link ByteBuffer#get} so that its shortened Groovy getter
+	 * form looks consistent alongside the other shortened getters like short,
+	 * int, etc.
+	 * 
+	 * @param self
+	 * @return
+	 */
+	static byte getByte(ByteBuffer self) {
+
+		return self.get()
+	}
+
+	/**
 	 * Convenience method for calling {@link ByteBuffer#mark}, executing the
 	 * closure, and then calling {@link ByteBuffer#reset} before returning.
 	 *
