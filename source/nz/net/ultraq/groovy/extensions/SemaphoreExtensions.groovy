@@ -20,14 +20,14 @@ import java.util.concurrent.Semaphore
 
 /**
  * Extension methods for the Semaphore concurrency utility.
- * 
+ *
  * @author Emanuel Rabina
  */
 class SemaphoreExtensions {
 
 	/**
 	 * Acquire and release a single permit around the given closure.
-	 * 
+	 *
 	 * @param self
 	 * @param closure
 	 * @return
@@ -40,6 +40,26 @@ class SemaphoreExtensions {
 		}
 		finally {
 			self.release()
+		}
+	}
+
+	/**
+	 * Using {@link Semaphore#tryAcquire}, execute the closure and release the
+	 * semaphore if {@code tryAcquire} returned {@code true}.
+	 *
+	 * @param self
+	 * @param closure
+	 * @return
+	 */
+	static <T> T tryAcquireAndRelease(Semaphore self, Closure<T> closure) {
+
+		if (self.tryAcquire()) {
+			try {
+				return closure()
+			}
+			finally {
+				self.release()
+			}
 		}
 	}
 }

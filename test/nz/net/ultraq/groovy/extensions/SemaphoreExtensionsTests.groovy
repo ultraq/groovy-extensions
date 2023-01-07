@@ -22,7 +22,7 @@ import java.util.concurrent.Semaphore
 
 /**
  * Tests for the {@link SemaphoreExtensions} methods.
- * 
+ *
  * @author Emanuel Rabina
  */
 class SemaphoreExtensionsTests extends Specification {
@@ -36,5 +36,15 @@ class SemaphoreExtensionsTests extends Specification {
 			}
 			assert semaphore.tryAcquire()
 			result == 'Hello!'
+	}
+
+	def "Doesn't execute the closure if it fails to acquire the semaphore"() {
+		expect:
+			def semaphore = new Semaphore(1)
+			semaphore.acquire()
+			def result = semaphore.tryAcquireAndRelease { ->
+				return 'Hello!'
+			}
+			assert result == null
 	}
 }
