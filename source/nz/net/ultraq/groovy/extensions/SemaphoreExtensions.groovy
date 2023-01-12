@@ -50,6 +50,8 @@ class SemaphoreExtensions {
 	 * @param self
 	 * @param closure
 	 * @return
+	 *   The result of executing the closure if {@code tryAcquire} returns
+	 *   {@code true}, otherwise {@code null}.
 	 */
 	static <T> T tryAcquireAndRelease(Semaphore self, Closure<T> closure) {
 
@@ -61,5 +63,6 @@ class SemaphoreExtensions {
 				self.release()
 			}
 		}
+		return null
 	}
 }
