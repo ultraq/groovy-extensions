@@ -18,14 +18,14 @@ package nz.net.ultraq.groovy.extensions
 
 /**
  * Static method extensions to the {@code Math} class.
- * 
+ *
  * @author Emanuel Rabina
  */
 class MathStaticExtensions {
 
 	/**
 	 * Clamp an {@code int} value to the given range.
-	 * 
+	 *
 	 * @param self
 	 * @param value
 	 * @param lower
@@ -39,7 +39,7 @@ class MathStaticExtensions {
 
 	/**
 	 * Clamp a {@code float} value to the given range.
-	 * 
+	 *
 	 * @param self
 	 * @param value
 	 * @param lower
@@ -52,8 +52,26 @@ class MathStaticExtensions {
 	}
 
 	/**
+	 * Wrap an {@code int} value within a certain range.
+	 *
+	 * @param self
+	 * @param value
+	 * @param lower
+	 * @param upper
+	 * @return
+	 */
+	static int wrap(Math self, int value, int lower, int upper) {
+
+		// @formatter:off
+		return value < lower ? wrap(self, upper - (lower - value), lower, upper) :
+		       value > upper ? wrap(self, lower + (value - upper), lower, upper) :
+		       value
+		// @formatter:on
+	}
+
+	/**
 	 * Wrap a {@code float} value within a certain range.
-	 * 
+	 *
 	 * @param self
 	 * @param value
 	 * @param lower
@@ -62,8 +80,10 @@ class MathStaticExtensions {
 	 */
 	static float wrap(Math self, float value, float lower, float upper) {
 
+		// @formatter:off
 		return value < lower ? wrap(self, upper - (lower - value) as float, lower, upper) :
 		       value > upper ? wrap(self, lower + (value - upper) as float, lower, upper) :
 		       value
+		// @formatter:on
 	}
 }

@@ -20,7 +20,7 @@ import spock.lang.Specification
 
 /**
  * Tests for the static extension methods to the {@code Math} class.
- * 
+ *
  * @author Emanuel Rabina
  */
 class MathStaticExtensionsTests extends Specification {
@@ -41,10 +41,18 @@ class MathStaticExtensionsTests extends Specification {
 			value << [1.5f, -3.2f, 22f]
 	}
 
-	def "Wraps values to the specified range"(float value) {
+	def "Wraps int values to the specified range"(int value) {
 		expect:
 			Math.wrap(value, 0, 10) >= 0
 			Math.wrap(value, 0, 10) <= 10
+		where:
+			value << [1, -3, 22]
+	}
+
+	def "Wraps float values to the specified range"(float value) {
+		expect:
+			Math.wrap(value, 0f, 10f) >= 0f
+			Math.wrap(value, 0f, 10f) <= 10f
 		where:
 			value << [1.5f, -3.2f, 22f]
 	}
