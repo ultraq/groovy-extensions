@@ -41,19 +41,29 @@ class MathStaticExtensionsTests extends Specification {
 			value << [1.5f, -3.2f, 22f]
 	}
 
-	def "Wraps int values to the specified range"(int value) {
+	def "Wraps int values to the specified range"(int value, int result) {
 		expect:
-			Math.wrap(value, 0, 10) >= 0
-			Math.wrap(value, 0, 10) <= 10
+			Math.wrap(value, 0, 10) == result
 		where:
-			value << [1, -3, 22]
+			// @formatter:off
+			value | result
+			    1 |      1
+			   -3 |      7
+			   22 |      2
+			   10 |      0
+			// @formatter:on
 	}
 
-	def "Wraps float values to the specified range"(float value) {
+	def "Wraps float values to the specified range"(float value, float result) {
 		expect:
-			Math.wrap(value, 0f, 10f) >= 0f
-			Math.wrap(value, 0f, 10f) <= 10f
+			Math.wrap(value, 0f, 10f) == result
 		where:
-			value << [1.5f, -3.2f, 22f]
+			// @formatter:off
+			value | result
+			 1.5f |   1.5f
+			-3.2f |   6.8f
+			  22f |   2.0f
+		    10f |     0f
+			// @formatter:on
 	}
 }

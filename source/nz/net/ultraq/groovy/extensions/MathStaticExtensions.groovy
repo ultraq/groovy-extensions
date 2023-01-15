@@ -24,7 +24,8 @@ package nz.net.ultraq.groovy.extensions
 class MathStaticExtensions {
 
 	/**
-	 * Clamp an {@code int} value to the given range.
+	 * Clamp an {@code int} value to the given range.  Both lower and upper values
+	 * are inclusive.
 	 *
 	 * @param self
 	 * @param value
@@ -38,7 +39,8 @@ class MathStaticExtensions {
 	}
 
 	/**
-	 * Clamp a {@code float} value to the given range.
+	 * Clamp a {@code float} value to the given range.  Both lower and upper values
+	 * are inclusive.
 	 *
 	 * @param self
 	 * @param value
@@ -52,7 +54,8 @@ class MathStaticExtensions {
 	}
 
 	/**
-	 * Wrap an {@code int} value within a certain range.
+	 * Wrap an {@code int} value within a certain range.  The lower value is
+	 * inclusive, whereas the upper value is not.
 	 *
 	 * @param self
 	 * @param value
@@ -64,13 +67,14 @@ class MathStaticExtensions {
 
 		// @formatter:off
 		return value < lower ? wrap(self, upper - (lower - value), lower, upper) :
-		       value > upper ? wrap(self, lower + (value - upper), lower, upper) :
+		       value >= upper ? wrap(self, lower + (value - upper), lower, upper) :
 		       value
 		// @formatter:on
 	}
 
 	/**
-	 * Wrap a {@code float} value within a certain range.
+	 * Wrap a {@code float} value within a certain range.  The lower value is
+	 * inclusive, whereas the upper value is not.
 	 *
 	 * @param self
 	 * @param value
@@ -82,7 +86,7 @@ class MathStaticExtensions {
 
 		// @formatter:off
 		return value < lower ? wrap(self, upper - (lower - value) as float, lower, upper) :
-		       value > upper ? wrap(self, lower + (value - upper) as float, lower, upper) :
+		       value >= upper ? wrap(self, lower + (value - upper) as float, lower, upper) :
 		       value
 		// @formatter:on
 	}
