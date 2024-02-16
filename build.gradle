@@ -25,20 +25,27 @@ apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.3.1/maven
 
 description = 'A collection of extensions for Groovy projects that I almost wish were a part of the GDK'
 version = '2.3.0-SNAPSHOT'
-sourceCompatibility = 1.8
 group = 'nz.net.ultraq.groovy'
 year = '2020'
 
 dependencies {
-	implementation 'org.apache.groovy:groovy:4.0.15'
+	implementation 'org.apache.groovy:groovy:4.0.18'
 
 	testImplementation 'net.bytebuddy:byte-buddy:1.14.7'
 	testImplementation 'org.objenesis:objenesis:3.3'
 	testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
 }
 
-test {
-	useJUnitPlatform()
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+testing {
+	suites {
+		test {
+			useJUnitJupiter()
+		}
+	}
 }
 
 jar {
