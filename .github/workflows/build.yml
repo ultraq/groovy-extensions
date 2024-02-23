@@ -19,3 +19,4 @@ jobs:
       - uses: codecov/codecov-action@v4
         with:
           directory: build/reports/jacoco/
+          token: ${{ secrets.CODECOV_TOKEN }}
