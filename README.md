@@ -18,7 +18,7 @@ Add a dependency to your project with the following co-ordinates:
 
  - GroupId: `nz.net.ultraq.groovy`
  - ArtifactId: `groovy-extensions`
- - Version: `2.2.0`
+ - Version: `2.3.0`
 
 Check the [project releases](https://github.com/ultraq/groovy-extensions/releases)
 for a list of available versions.
