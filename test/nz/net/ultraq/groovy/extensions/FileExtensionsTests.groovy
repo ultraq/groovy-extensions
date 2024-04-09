@@ -1,5 +1,3 @@
-import spock.lang.Specification
-
 /*
  * Copyright 2024, Emanuel Rabina (http://www.ultraq.net.nz/)
  *
@@ -15,6 +13,10 @@ import spock.lang.Specification
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package nz.net.ultraq.groovy.extensions
+
+import spock.lang.Specification
 
 /**
  * Tests for the file extensions
