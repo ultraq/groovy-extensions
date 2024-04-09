@@ -65,6 +65,6 @@ class ResourceExtensions {
 	 */
 	static String getResourceAsText(Object self, String resourcePath) {
 
-		return getResourceAsStream(self, resourcePath).text
+		return getResourceAsStream(self, resourcePath).withCloseable { it.text }
 	}
 }

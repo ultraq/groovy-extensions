@@ -63,12 +63,12 @@ class ResourceExtensionsTests extends Specification {
 			assert ex.message == "Resource not found: ${resourcePath}"
 	}
 
-	def "#getResourceAsText - Is a shortcut to getResourceAsStream().getText()"() {
+	def "#getResourceAsText - Returns the text content of a resource"() {
 		given:
 			def resourcePath = 'nz/net/ultraq/groovy/extensions/ResourceExtensionsTestsFile.txt'
 		when:
 			def result = getResourceAsText(resourcePath)
 		then:
-			assert result == getResourceAsStream(resourcePath).text
+			assert result == getResourceAsStream(resourcePath).withCloseable { it.text }
 	}
 }
