@@ -29,7 +29,8 @@ extensionClasses = nz.net.ultraq.groovy.extensions.BlockingQueueExtensions,\
                    nz.net.ultraq.groovy.extensions.ObjectExtensions,\
                    nz.net.ultraq.groovy.extensions.ResourceExtensions,\
                    nz.net.ultraq.groovy.extensions.SemaphoreExtensions,\
-                   nz.net.ultraq.groovy.extensions.ShortBufferExtensions
+                   nz.net.ultraq.groovy.extensions.ShortBufferExtensions,\
+                   nz.net.ultraq.groovy.extensions.StringExtensions
 staticExtensionClasses = nz.net.ultraq.groovy.extensions.ByteBufferStaticExtensions,\
                          nz.net.ultraq.groovy.extensions.MathStaticExtensions,\
                          nz.net.ultraq.groovy.extensions.ObjectStaticExtensions
