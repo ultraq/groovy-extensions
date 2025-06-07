@@ -12,13 +12,13 @@ A collection of extensions for Groovy that I wish were a part of the GDK.
 Installation
 ------------
 
-Minimum of Java 8 required.
+Minimum of Java 17 required.
 
 Add a dependency to your project with the following co-ordinates:
 
  - GroupId: `nz.net.ultraq.groovy`
  - ArtifactId: `groovy-extensions`
- - Version: `2.3.3`
+ - Version: `3.0.0-SNAPSHOT`
 
 Check the [project tags](https://github.com/ultraq/groovy-extensions/tags)
 for a list of available versions.
