@@ -31,6 +31,19 @@ package nz.net.ultraq.groovy.extensions
 class StringExtensions {
 
 	/**
+	 * The same as a standard {@code join} method, but removes any double-ups of
+	 * the separator in cases when some parts already contain it.  eg:
+	 * <p>
+	 * {@code ['/part1/', '/part2'].joinAndNormalize('/') == '/part1/part2'}
+	 * <p>
+	 * Useful for things like path segments in URLs or file systems.
+	 */
+	static String joinAndNormalize(String[] self, String separator) {
+
+		return self.join(separator).replaceAll(/${separator}{2,}/, separator)
+	}
+
+	/**
 	 * Convert a string from any of the supported cases to PascalCase.
 	 */
 	static String toPascalCase(String self) {

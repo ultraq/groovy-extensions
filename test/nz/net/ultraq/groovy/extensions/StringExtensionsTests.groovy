@@ -25,6 +25,18 @@ import spock.lang.Specification
  */
 class StringExtensionsTests extends Specification {
 
+	def "Normalizes duplicate separators"(String[] input) {
+		expect:
+			input.joinAndNormalize('/') == '/part1/part2'
+		where:
+			input << [
+			  ['/part1', 'part2'],
+				['/part1/', 'part2'],
+				['/part1', '/part2'],
+				['/part1/', '/part2']
+			]
+	}
+
 	def "Convert from sentence case to PascalCase"(String input) {
 		expect:
 			input.toPascalCase() == "TurnToPascalCase"
