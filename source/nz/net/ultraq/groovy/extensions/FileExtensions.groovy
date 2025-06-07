@@ -25,13 +25,13 @@ class FileExtensions {
 
 	/**
 	 * Returns the file name, but without any extension part.
-	 * <p>
-	 * Note that Groovy 5 will include this as part of the GDK as
-	 * {@code File.baseName}.
 	 *
+	 * @deprecated
+	 *   Groovy 5 will include this as part of the GDK as {@code File.baseName} 🥳
 	 * @param self
 	 * @return
 	 */
+	@Deprecated
 	static String getNameWithoutExtension(File self) {
 
 		return self.name.contains('.') ? self.name.substring(0, self.name.indexOf('.')) : self.name
