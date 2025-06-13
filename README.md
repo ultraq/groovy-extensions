@@ -12,7 +12,7 @@ A collection of extensions for Groovy that I wish were a part of the GDK.
 Installation
 ------------
 
-Minimum of Java 17 required.
+Minimum of Java 17 and Groovy 4 required.
 
 Add a dependency to your project with the following co-ordinates:
 
