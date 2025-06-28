@@ -19,14 +19,24 @@ plugins {
 	id 'jacoco'
 	id 'maven-publish'
 	id 'idea'
+	id 'nz.net.ultraq.gradle.use-maven-central-repositories' version '5.0.0-SNAPSHOT'
+	id 'nz.net.ultraq.gradle.single-source-directory' version '5.0.0-SNAPSHOT'
+	id 'nz.net.ultraq.gradle.groovy-support' version '5.0.0-SNAPSHOT'
+//	id 'nz.net.ultraq.gradle.development-plugin' version '5.0.0-SNAPSHOT'
 }
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.4.1/gradle-support.gradle'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.4.1/maven-publish-support.gradle'
 
 description = 'A collection of extensions for Groovy projects that I almost wish were a part of the GDK'
 version = '3.0.0-SNAPSHOT'
 group = 'nz.net.ultraq.groovy'
-year = '2020'
+
+sourceSets {
+	main {
+		withSingleSourceDirectory('source')
+	}
+	test {
+		withSingleSourceDirectory('test')
+	}
+}
 
 dependencies {
 	implementation 'org.apache.groovy:groovy:4.0.27'
@@ -41,6 +51,13 @@ java {
 		languageVersion = JavaLanguageVersion.of(17)
 		vendor = JvmVendorSpec.ADOPTIUM
 	}
+	withJavadocJar()
+	withSourcesJar()
+}
+
+groovy {
+	expandExtensionModuleVersion()
+	withGroovydocJar()
 }
 
 testing {
