@@ -15,44 +15,45 @@
  */
 
 plugins {
-	id 'groovy'
-	id 'jacoco'
 	id 'maven-publish'
 	id 'idea'
+	id 'nz.net.ultraq.gradle.fluent-configuration' version '0.2.1-SNAPSHOT'
 }
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.4.1/gradle-support.gradle'
-apply from: 'https://raw.githubusercontent.com/ultraq/gradle-support/4.4.1/maven-publish-support.gradle'
 
 description = 'A collection of extensions for Groovy projects that I almost wish were a part of the GDK'
 version = '3.0.0-SNAPSHOT'
 group = 'nz.net.ultraq.groovy'
-year = '2020'
 
-dependencies {
-	implementation 'org.apache.groovy:groovy:4.0.27'
+configure {
+	createGroovyProject()
+		.useJavaVersion(17)
+		.useMavenCentralRepositories()
+		.configureSource()
+			.withSourceDirectory('source')
+			.withDependencies() {
+				implementation 'org.apache.groovy:groovy:4.0.27'
+			}
+			.expandExtensionModuleVersion()
+		.configureTesting()
+			.withTestDirectory('test')
+			.withTestDependencies() {
+				testImplementation 'net.bytebuddy:byte-buddy:1.14.18'
+				testImplementation 'org.objenesis:objenesis:3.4'
+				testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
+			}
+			.useJUnitJupiter()
+			.useJacoco()
 
-	testImplementation 'net.bytebuddy:byte-buddy:1.14.18'
-	testImplementation 'org.objenesis:objenesis:3.4'
-	testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
-}
-
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-		vendor = JvmVendorSpec.ADOPTIUM
-	}
-}
-
-testing {
-	suites {
-		test {
-			useJUnitJupiter()
+	createMavenPublication()
+		.addJar() {
+			manifest {
+				attributes('Automatic-Module-Name': 'nz.net.ultraq.groovy.extensions')
+			}
 		}
-	}
-}
+		.addSourcesJar()
+		.addGroovydocJar()
+		.configurePom() {
 
-jar {
-	manifest {
-		attributes('Automatic-Module-Name': 'nz.net.ultraq.groovy.extensions')
-	}
+		}
+		.publishToMavenCentral()
 }
