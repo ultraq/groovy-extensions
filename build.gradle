@@ -15,7 +15,6 @@
  */
 
 plugins {
-	id 'maven-publish'
 	id 'idea'
 	id 'nz.net.ultraq.gradle.fluent-configuration' version '0.2.1-SNAPSHOT'
 }
@@ -53,7 +52,20 @@ configure {
 		.addSourcesJar()
 		.addGroovydocJar()
 		.configurePom() {
-
+			url = 'https://github.com/ultraq/groovy-extensions'
+			inceptionYear = '2020'
 		}
-		.publishToMavenCentral()
+			.useApache20License()
+			.withGitHubScm('ultraq')
+			.withDevelopers([
+				[
+					name: 'Emanuel Rabina',
+					email: 'emanuelrabina@gmail.com',
+					url: 'https://www.ultraq.net.nz'
+				]
+			])
+			.publishToMavenCentral(
+				property('mavenCentral.publisher.username'),
+				property('mavenCentral.publisher.password')
+			)
 }
