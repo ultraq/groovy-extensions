@@ -64,7 +64,7 @@ configure {
 				url: 'https://www.ultraq.net.nz'
 			])
 			.publishToMavenCentral(
-				property('mavenCentral.publisher.username'),
-				property('mavenCentral.publisher.password')
+				findProperty('mavenCentral.publisher.username'),
+				findProperty('mavenCentral.publisher.password')
 			)
 }
