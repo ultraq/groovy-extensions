@@ -25,16 +25,16 @@ import spock.lang.Specification
  */
 class InputStreamExtensionsTests extends Specification {
 
-	def inputStream = new ByteArrayInputStream([1, 2, 3, 4] as byte[])
+	var inputStream = new ByteArrayInputStream([1, 2, 3, 4] as byte[])
 
 	def "markAndReset - Calls mark, executes the closure, and calls reset"() {
 		given:
-			def mockStream = Mock(InputStream)
-			def response = 'Hello!'
+			var mockStream = Mock(InputStream)
+			var response = 'Hello!'
 			Closure closure = Mock()
 			closure.call(_) >> response
 		when:
-			def result = mockStream.markAndReset(2, closure)
+			var result = mockStream.markAndReset(2, closure)
 		then:
 			1 * mockStream.mark(2)
 			1 * mockStream.reset()
@@ -52,7 +52,7 @@ class InputStreamExtensionsTests extends Specification {
 
 	def "markAndReset - Calls reset when an exception occurs"() {
 		given:
-			def mockStream = Mock(InputStream)
+			var mockStream = Mock(InputStream)
 			Closure closure = Mock() {
 				call(_) >> {
 					throw new Exception('Testing')
@@ -68,11 +68,11 @@ class InputStreamExtensionsTests extends Specification {
 
 	def "withBufferedReader - Returns the result of the closure"() {
 		given:
-			def response = 'result'
+			var response = 'result'
 			Closure closure = Mock()
 			closure.call(_) >> response
 		when:
-			def result = inputStream.withBufferedReader(closure)
+			var result = inputStream.withBufferedReader(closure)
 		then:
 			assert result == response
 	}
@@ -88,11 +88,11 @@ class InputStreamExtensionsTests extends Specification {
 
 	def "withBufferedStream - Returns the result of the closure"() {
 		given:
-			def response = 'result'
+			var response = 'result'
 			Closure closure = Mock()
 			closure.call(_) >> response
 		when:
-			def result = inputStream.withBufferedStream(closure)
+			var result = inputStream.withBufferedStream(closure)
 		then:
 			assert result == response
 	}

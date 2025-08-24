@@ -50,8 +50,8 @@ class InputStreamExtensions {
 	}
 
 	/**
-	 * Wrap an input stream with a buffered reader and invoke the usual
-	 * {@code withReader} method over it.
+	 * Ensure an input stream is a {@link BufferedInputStream}, wrapping it in one
+	 * if necessary, before invoking the usual {@code withReader} method over it.
 	 *
 	 * @param self
 	 * @param closure
@@ -60,12 +60,14 @@ class InputStreamExtensions {
 	static <T> T withBufferedReader(InputStream self,
 		@ClosureParams(value = SimpleType, options = 'java.io.BufferedReader') Closure<T> closure) {
 
-		return new BufferedInputStream(self).withReader(closure)
+		return self instanceof BufferedInputStream ?
+			self.withReader(closure) :
+			new BufferedInputStream(self).withReader(closure)
 	}
 
 	/**
-	 * Wrap an input stream with a buffered one and invoke the usual
-	 * {@code withStream} method over it.
+	 * Ensure an input stream is a {@link BufferedInputStream}, wrapping it in one
+	 * if necessary, before invoking the usual {@code withStream} method over it.
 	 *
 	 * @param self
 	 * @param closure
@@ -74,6 +76,8 @@ class InputStreamExtensions {
 	static <T> T withBufferedStream(InputStream self,
 		@ClosureParams(value = SimpleType, options = 'java.io.BufferedInputStream') Closure<T> closure) {
 
-		return new BufferedInputStream(self).withStream(closure)
+		return self instanceof BufferedInputStream ?
+			self.withStream(closure) :
+			new BufferedInputStream(self).withStream(closure)
 	}
 }
