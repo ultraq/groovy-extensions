@@ -25,7 +25,7 @@ import spock.lang.Specification
  */
 class InputStreamExtensionsTests extends Specification {
 
-	var inputStream = new ByteArrayInputStream([1, 2, 3, 4] as byte[])
+	def inputStream = new ByteArrayInputStream([1, 2, 3, 4] as byte[])
 
 	def "markAndReset - Calls mark, executes the closure, and calls reset"() {
 		given:
