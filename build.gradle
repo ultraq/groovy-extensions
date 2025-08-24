@@ -16,7 +16,7 @@
 
 plugins {
 	id 'idea'
-	id 'nz.net.ultraq.gradle.fluent-configuration' version '0.6.0'
+	id 'nz.net.ultraq.gradle.fluent-configuration' version '0.6.1'
 }
 
 description = 'A collection of extensions for Groovy projects that I almost wish were a part of the GDK'
@@ -65,6 +65,7 @@ configure {
 			])
 			.publishToMavenCentral(
 				findProperty('mavenCentral.publisher.username'),
-				findProperty('mavenCentral.publisher.password')
+				findProperty('mavenCentral.publisher.password'),
+				'nz.net.ultraq'
 			)
 }
