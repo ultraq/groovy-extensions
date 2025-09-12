@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.*
 class ResourceExtensionsTests {
 
 	@Test
-	void '#getResourceAsFile - Is a shortcut to new File(ClassLoader.getResource().toURI())'() {
+	void '#getResourceAsFile - Is a shortcut to new File(ClassLoader#getResource()#toURI())'() {
 		given:
 			var resourcePath = 'nz/net/ultraq/groovy/extensions/ResourceExtensionsTestsFile.txt'
 		when:
@@ -48,7 +48,7 @@ class ResourceExtensionsTests {
 	}
 
 	@Test
-	void "#getResourceAsStream - Is a shortcut to ClassLoader.getResourceAsStream"() {
+	void "#getResourceAsStream - Is a shortcut to ClassLoader#getResourceAsStream"() {
 		given:
 			var resourcePath = 'nz/net/ultraq/groovy/extensions/ResourceExtensionsTestsFile.txt'
 		when:
