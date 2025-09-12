@@ -16,84 +16,92 @@
 
 package nz.net.ultraq.groovy.extensions
 
-import spock.lang.Specification
+import org.junit.jupiter.api.Test
+import static org.assertj.core.api.Assertions.*
+import static org.mockito.Mockito.*
 
 /**
  * Tests for the {@link InputStreamExtensions} methods.
  *
  * @author Emanuel Rabina
  */
-class InputStreamExtensionsTests extends Specification {
+class InputStreamExtensionsTests {
 
-	def inputStream = new ByteArrayInputStream([1, 2, 3, 4] as byte[])
+	InputStream inputStream = new ByteArrayInputStream([1, 2, 3, 4] as byte[])
 
-	def "markAndReset - Calls mark, executes the closure, and calls reset"() {
+	@Test
+	void '#markAndReset - Calls mark, executes the closure, and calls reset'() {
 		given:
-			var mockStream = Mock(InputStream)
+			var mockStream = mock(InputStream)
 			var response = 'Hello!'
-			Closure closure = Mock()
-			closure.call(_) >> response
 		when:
-			var result = mockStream.markAndReset(2, closure)
+			var result = mockStream.markAndReset(2) { _ ->
+				return response
+			}
 		then:
-			1 * mockStream.mark(2)
-			1 * mockStream.reset()
-			assert result == response
+			verify(mockStream).mark(2)
+			verify(mockStream).reset()
+			assertThat(result).isEqualTo(response)
 	}
 
-	def "markAndReset - Passes the inputstream as a parameter to the closure"() {
-		given:
-			Closure closure = Mock()
-		when:
-			inputStream.markAndReset(Integer.MAX_VALUE, closure)
+	@Test
+	void '#markAndReset - Passes the inputstream as a parameter to the closure'() {
+			var argument = null
+			inputStream.markAndReset(Integer.MAX_VALUE) { stream ->
+				argument = stream
+			}
 		then:
-			1 * closure.call(inputStream)
+			assertThat(argument).isEqualTo(inputStream)
 	}
 
-	def "markAndReset - Calls reset when an exception occurs"() {
+	@Test
+	void '#markAndReset - Calls reset when an exception occurs'() {
 		given:
-			var mockStream = Mock(InputStream)
-			Closure closure = Mock() {
-				call(_) >> {
+			var mockStream = mock(InputStream)
+		when:
+			var exception = catchException { ->
+				mockStream.markAndReset(2) { _ ->
 					throw new Exception('Testing')
 				}
 			}
-		when:
-			mockStream.markAndReset(2, closure)
 		then:
-			1 * mockStream.mark(2)
-			thrown(Exception)
-			1 * mockStream.reset()
+			verify(mockStream).mark(2)
+			assertThat(exception).hasMessage('Testing')
+			verify(mockStream).reset()
 	}
 
-	def "withBufferedReader - Returns the result of the closure"() {
+	@Test
+	void '#withBufferedReader - Returns the result of the closure'() {
 		given:
 			var response = 'result'
-			Closure closure = Mock()
-			closure.call(_) >> response
 		when:
-			var result = inputStream.withBufferedReader(closure)
+			var result = inputStream.withBufferedReader { _ ->
+				return response
+			}
 		then:
-			assert result == response
+			assertThat(result).isEqualTo(response)
 	}
 
-	def "withBufferedStream - Uses a buffered wrapper around an existing stream"() {
-		given:
-			Closure closure = Mock()
+	@Test
+	void 'withBufferedStream - Uses a buffered wrapper around an existing stream'() {
 		when:
-			inputStream.withBufferedStream(closure)
+			var argument = null
+			inputStream.withBufferedStream() { stream ->
+				argument = stream
+			}
 		then:
-			1 * closure.call(_ as BufferedInputStream)
+			assertThat(argument).isInstanceOf(BufferedInputStream)
 	}
 
-	def "withBufferedStream - Returns the result of the closure"() {
+	@Test
+	void '#withBufferedStream - Returns the result of the closure'() {
 		given:
 			var response = 'result'
-			Closure closure = Mock()
-			closure.call(_) >> response
 		when:
-			var result = inputStream.withBufferedStream(closure)
+			var result = inputStream.withBufferedStream() { _ ->
+				return response
+			}
 		then:
-			assert result == response
+			assertThat(result).isEqualTo(response)
 	}
 }

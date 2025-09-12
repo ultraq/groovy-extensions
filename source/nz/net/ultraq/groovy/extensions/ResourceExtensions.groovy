@@ -25,10 +25,6 @@ class ResourceExtensions {
 
 	/**
 	 * A shortcut to {@code new File(ClassLoader.getResource.toURI())}.
-	 *
-	 * @param self
-	 * @param resourcePath
-	 * @return
 	 */
 	static File getResourceAsFile(Object self, String resourcePath) {
 
@@ -41,14 +37,10 @@ class ResourceExtensions {
 
 	/**
 	 * A shortcut to {@code ClassLoader.getResourceAsStream}.
-	 *
-	 * @param self
-	 * @param resourcePath
-	 * @return
 	 */
 	static InputStream getResourceAsStream(Object self, String resourcePath) {
 
-		def inputStream = self.class.classLoader.getResourceAsStream(resourcePath)
+		var inputStream = self.class.classLoader.getResourceAsStream(resourcePath)
 		if (inputStream) {
 			return inputStream
 		}
@@ -58,13 +50,9 @@ class ResourceExtensions {
 	/**
 	 * A combination {@link #getResourceAsStream} followed by a {@code .getText()}
 	 * call.
-	 *
-	 * @param self
-	 * @param resourcePath
-	 * @return
 	 */
 	static String getResourceAsText(Object self, String resourcePath) {
 
-		return getResourceAsStream(self, resourcePath).withCloseable { it.text }
+		return getResourceAsStream(self, resourcePath).getText()
 	}
 }

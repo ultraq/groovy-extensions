@@ -16,31 +16,35 @@
 
 package nz.net.ultraq.groovy.extensions
 
-import spock.lang.Specification
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
+import static org.assertj.core.api.Assertions.*
 
 /**
  * Tests for the {@link DataInputExtensions} methods.
  *
  * @author Emanuel Rabina
  */
-class DataInputExtensionsTests extends Specification {
+class DataInputExtensionsTests {
 
-	def data = [1, 2, 3, 4] as byte[]
-	def inputStream = new DataInputStream(new ByteArrayInputStream(data))
+	byte[] data = [1, 2, 3, 4]
+	DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(data))
 
-	def "Reads the specified number of bytes"(int numBytes) {
+	@ParameterizedTest
+	@ValueSource(ints = [0, 1, 3])
+	void 'Reads the specified number of bytes'(int numBytes) {
 		when:
-			def result = inputStream.readBytes(numBytes)
+			var result = inputStream.readBytes(numBytes)
 		then:
-			result == data[0..<numBytes]
-		where:
-			numBytes << [0, 1, 3]
+			assertThat(result).isEqualTo(data[0..<numBytes] as byte[])
 	}
 
-	def "Throws EOFException when numBytes exceeds available data"() {
+	@Test
+	void 'Throws EOFException when numBytes exceeds available data'() {
 		when:
-			inputStream.readBytes(5)
+			var exception = catchException { -> inputStream.readBytes(5) }
 		then:
-			thrown(EOFException)
+			assertThat(exception).isInstanceOf(EOFException)
 	}
 }

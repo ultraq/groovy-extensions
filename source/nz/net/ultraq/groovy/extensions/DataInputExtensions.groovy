@@ -25,14 +25,10 @@ class DataInputExtensions {
 
 	/**
 	 * Read up to the specified number of bytes, returning them in a {@code byte[]}.
-	 *
-	 * @param self
-	 * @param length
-	 * @return
 	 */
 	static byte[] readBytes(DataInput self, int length) {
 
-		def bytes = new byte[length]
+		var bytes = new byte[length]
 		self.readFully(bytes)
 		return bytes
 	}

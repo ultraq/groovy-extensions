@@ -26,9 +26,6 @@ class OperatingSystemExtensions {
 
 	/**
 	 * Return whether the current processor has a 64-bit ARM architecture.
-	 *
-	 * @param self
-	 * @return
 	 */
 	static boolean isArm64(System self) {
 
@@ -37,9 +34,6 @@ class OperatingSystemExtensions {
 
 	/**
 	 * Return whether the current OS is macOS.
-	 *
-	 * @param self
-	 * @return
 	 */
 	static boolean isMacOs(System self) {
 
@@ -48,9 +42,6 @@ class OperatingSystemExtensions {
 
 	/**
 	 * Return whether the current OS is Windows.
-	 *
-	 * @param self
-	 * @return
 	 */
 	static boolean isWindows(System self) {
 

@@ -16,14 +16,15 @@
 
 package nz.net.ultraq.groovy.extensions
 
-import spock.lang.Specification
+import org.junit.jupiter.api.Test
+import static org.assertj.core.api.Assertions.*
 
 /**
  * Tests for the {@link ObjectStaticExtensions} extension module.
- * 
+ *
  * @author Emanuel Rabina
  */
-class ObjectStaticExtensionsTests extends Specification {
+class ObjectStaticExtensionsTests {
 
 	static class TestClass {
 		static String someMethod() {
@@ -31,12 +32,13 @@ class ObjectStaticExtensionsTests extends Specification {
 		}
 	}
 
-	def "with invokes static methods"() {
+	@Test
+	void 'with invokes static methods'() {
 		when:
-			def result = with(TestClass) {
+			var result = with(TestClass) {
 				return someMethod()
 			}
 		then:
-			result == TestClass.someMethod()
+			assertThat(result).isEqualTo(TestClass.someMethod())
 	}
 }

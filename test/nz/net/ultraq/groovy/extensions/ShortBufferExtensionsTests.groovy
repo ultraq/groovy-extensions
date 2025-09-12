@@ -1,12 +1,12 @@
-/* 
+/*
  * Copyright 2022, Emanuel Rabina (http://www.ultraq.net.nz/)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,24 +16,25 @@
 
 package nz.net.ultraq.groovy.extensions
 
-import spock.lang.Specification
+import org.junit.jupiter.api.Test
+import static org.assertj.core.api.Assertions.*
 
 import java.nio.ShortBuffer
 
 /**
  * Tests for the {@link ShortBufferExtensions} methods.
- * 
+ *
  * @author Emanuel Rabina
  */
-class ShortBufferExtensionsTests extends Specification {
+class ShortBufferExtensionsTests {
 
-	def "Moves the buffer position ahead by the given amount"() {
+	@Test
+	void 'Moves the buffer position ahead by the given amount'() {
 		given:
-			def buffer = ShortBuffer.allocate(100)
-			buffer.position(5)
+			var buffer = ShortBuffer.allocate(100).position(5)
 		when:
 			buffer.advance(10)
 		then:
-			buffer.position() == 15
+			assertThat(buffer.position()).isEqualTo(15)
 	}
 }

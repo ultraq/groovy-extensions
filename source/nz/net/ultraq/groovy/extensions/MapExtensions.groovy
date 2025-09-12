@@ -18,7 +18,7 @@ package nz.net.ultraq.groovy.extensions
 
 /**
  * Extensions to the {@code Map} interface.
- * 
+ *
  * @author Emanuel Rabina
  */
 class MapExtensions {
@@ -26,16 +26,10 @@ class MapExtensions {
 	/**
 	 * Very similar to Groovy's {@code Map.get(Object key, Object defaultValue)}
 	 * method, but allows the default value to be created in a closure.
-	 * 
-	 * @param <T>
-	 * @param self
-	 * @param key
-	 * @param create
-	 * @return The value stored in the object by {@code key}.
 	 */
 	static <K,V> V getOrCreate(Map<K,V> self, K key, Closure<V> create) {
 
-		def value = self[key]
+		var value = self[key]
 		if (!value) {
 			self[key] = value = create()
 		}

@@ -16,34 +16,37 @@
 
 package nz.net.ultraq.groovy.extensions
 
-import spock.lang.Specification
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
+import static org.assertj.core.api.Assertions.*
 
 /**
  * Tests for the {@link StringExtensions} methods.
  *
  * @author Emanuel Rabina
  */
-class StringExtensionsTests extends Specification {
+class StringExtensionsTests {
 
-	def "Normalizes duplicate separators"(String[] input) {
+	@ParameterizedTest
+	@CsvSource([
+		'/part1, part2',
+		'/part1/, part2',
+		'/part1, /part2',
+		'/part1/, /part2'
+	])
+	void 'Normalizes duplicate separators'(String part1, String part2) {
 		expect:
-			input.joinAndNormalize('/') == '/part1/part2'
-		where:
-			input << [
-			  ['/part1', 'part2'],
-				['/part1/', 'part2'],
-				['/part1', '/part2'],
-				['/part1/', '/part2']
-			]
+			assertThat(([part1, part2] as String[]).joinAndNormalize('/')).isEqualTo('/part1/part2')
 	}
 
-	def "Convert from sentence case to PascalCase"(String input) {
+	@ParameterizedTest
+	@ValueSource(strings = [
+		'Turn to pascal case',
+		'turn-to-pascal-case'
+	])
+	void "Convert from sentence case to PascalCase"(String input) {
 		expect:
-			input.toPascalCase() == "TurnToPascalCase"
-		where:
-			input << [
-				"Turn to pascal case",
-				"turn-to-pascal-case"
-			]
+			assertThat(input.toPascalCase()).isEqualTo("TurnToPascalCase")
 	}
 }

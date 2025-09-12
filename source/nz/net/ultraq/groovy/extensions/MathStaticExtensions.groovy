@@ -28,11 +28,6 @@ class MathStaticExtensions {
 	 * are inclusive.
 	 *
 	 * @deprecated This method is part of the {@code Math} class in Java 21.
-	 * @param self
-	 * @param value
-	 * @param lower
-	 * @param upper
-	 * @return
 	 */
 	static int clamp(Math self, int value, int lower, int upper) {
 
@@ -44,11 +39,6 @@ class MathStaticExtensions {
 	 * are inclusive.
 	 *
 	 * @deprecated This method is part of the {@code Math} class in Java 21.
-	 * @param self
-	 * @param value
-	 * @param lower
-	 * @param upper
-	 * @return
 	 */
 	static float clamp(Math self, float value, float lower, float upper) {
 
@@ -58,12 +48,6 @@ class MathStaticExtensions {
 	/**
 	 * Wrap an {@code int} value within a certain range.  The lower value is
 	 * inclusive, whereas the upper value is not.
-	 *
-	 * @param self
-	 * @param value
-	 * @param lower
-	 * @param upper
-	 * @return
 	 */
 	static int wrap(Math self, int value, int lower, int upper) {
 
@@ -77,12 +61,6 @@ class MathStaticExtensions {
 	/**
 	 * Wrap a {@code float} value within a certain range.  The lower value is
 	 * inclusive, whereas the upper value is not.
-	 *
-	 * @param self
-	 * @param value
-	 * @param lower
-	 * @param upper
-	 * @return
 	 */
 	static float wrap(Math self, float value, float lower, float upper) {
 

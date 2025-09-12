@@ -31,9 +31,6 @@ class ByteBufferExtensions {
 	 * An alias for {@link ByteBuffer#get} so that its shortened Groovy getter
 	 * form looks consistent alongside the other shortened getters like short,
 	 * int, etc.
-	 *
-	 * @param self
-	 * @return
 	 */
 	static byte getByte(ByteBuffer self) {
 
@@ -43,19 +40,13 @@ class ByteBufferExtensions {
 	/**
 	 * Convenience method for calling {@link ByteBuffer#mark}, executing the
 	 * closure, and then calling {@link ByteBuffer#reset} before returning.
-	 *
-	 * @param self
-	 * @param readLimit
-	 * @param closure
-	 * @return
 	 */
 	static <T> T markAndReset(ByteBuffer self,
 		@ClosureParams(value = SimpleType, options = "java.lang.ByteBuffer") Closure<T> closure) {
 
 		try {
 			self.mark()
-			def result = closure(self)
-			return result
+			return closure(self)
 		}
 		finally {
 			self.reset()
@@ -66,11 +57,6 @@ class ByteBufferExtensions {
 	 * A relative bulk <i>put</i> method using another {@code ByteBuffer} but only
 	 * reading up to {@code length} bytes from that buffer.  The position of both
 	 * buffers will be increased by {@code length}.
-	 *
-	 * @param self
-	 * @param src
-	 * @param length
-	 * @return
 	 */
 	static ByteBuffer put(ByteBuffer self, ByteBuffer src, int length) {
 
@@ -83,19 +69,15 @@ class ByteBufferExtensions {
 	 * Split a buffer into several smaller buffers of the specified size.  If the
 	 * size doesn't cleanly divide into the current buffer, then the final buffer
 	 * will be smaller and contain the remaining bytes.
-	 *
-	 * @param self
-	 * @param length
-	 * @return
 	 */
 	static ByteBuffer[] split(ByteBuffer self, int length) {
 
 		self.rewind()
-		def buffers = new ByteBuffer[Math.ceil(self.limit() / length)].collect {
-			def bufferSize = Math.min(length, self.remaining())
+		var buffers = new ByteBuffer[Math.ceil(self.limit() / length)].collect {
+			var bufferSize = Math.min(length, self.remaining())
 			return ByteBuffer.allocate(bufferSize).order(self.order())
 				.put(self, bufferSize)
-				.rewind()
+				.flip()
 		}
 		self.rewind()
 		return buffers

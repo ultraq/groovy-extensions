@@ -1,5 +1,5 @@
 /*
- * Copyright 2024, Emanuel Rabina (http://www.ultraq.net.nz/)
+ * Copyright 2025, Emanuel Rabina (http://www.ultraq.net.nz/)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,25 @@
 
 package nz.net.ultraq.groovy.extensions
 
-import spock.lang.Specification
+import org.junit.jupiter.api.Test
+import static org.assertj.core.api.Assertions.*
+
+import java.nio.ByteBuffer
 
 /**
- * Tests for the file extensions
+ * Tests for the {@code Buffer} extensions.
  *
  * @author Emanuel Rabina
  */
-class FileExtensionsTests extends Specification {
+class BufferExtensionsTests {
 
-	def "Returns the name minus the extension part"() {
-		expect:
-			new File('Something.ext').nameWithoutExtension == 'Something'
-	}
-
-	def "Returns the name if no extension part is present"() {
-		expect:
-			new File('Something').nameWithoutExtension == 'Something'
+	@Test
+	void '#advance - Moves the buffer position ahead by the given amount'() {
+		given:
+			var buffer = ByteBuffer.allocate(100).position(5)
+		when:
+			buffer.advance(10)
+		then:
+			assertThat(buffer.position()).isEqualTo(15)
 	}
 }
