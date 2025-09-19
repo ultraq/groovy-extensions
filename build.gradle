@@ -63,9 +63,9 @@ configure {
 				email: 'emanuelrabina@gmail.com',
 				url: 'https://www.ultraq.net.nz'
 			])
-			.publishToMavenCentral(
-				findProperty('mavenCentral.publisher.username'),
-				findProperty('mavenCentral.publisher.password'),
-				'nz.net.ultraq'
-			)
+		.publishToMavenCentral(
+			findProperty('mavenCentral.publisher.username'),
+			findProperty('mavenCentral.publisher.password'),
+			'nz.net.ultraq'
+		)
 }
