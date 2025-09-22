@@ -16,11 +16,11 @@
 
 plugins {
 	id 'idea'
-	id 'nz.net.ultraq.gradle.fluent-configuration' version '0.6.2'
+	id 'nz.net.ultraq.gradle.fluent-configuration' version '0.7.0'
 }
 
 description = 'A collection of extensions for Groovy projects that I almost wish were a part of the GDK'
-version = '3.0.0'
+version = '3.1.0-SNAPSHOT'
 group = 'nz.net.ultraq.groovy'
 
 configure {
