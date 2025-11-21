@@ -20,7 +20,7 @@ plugins {
 }
 
 description = 'A collection of extensions for Groovy projects that I almost wish were a part of the GDK'
-version = '3.2.0'
+version = '3.2.1'
 group = 'nz.net.ultraq.groovy'
 
 configure {

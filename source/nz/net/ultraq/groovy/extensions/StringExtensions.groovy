@@ -40,7 +40,27 @@ class StringExtensions {
 	 */
 	static String joinAndNormalize(String[] self, String separator) {
 
-		return self.join(separator).replaceAll(/${separator}{2,}/, separator)
+		return joinAndNormalize(self.toList(), separator)
+	}
+
+	/**
+	 * The same as a standard {@code join} method, but removes any double-ups of
+	 * the separator in cases when some parts already contain it.  eg:
+	 * <p>
+	 * {@code ['/part1/', '/part2'].joinAndNormalize('/') == '/part1/part2'}
+	 * <p>
+	 * Useful for things like path segments in URLs or file systems.
+	 */
+	static String joinAndNormalize(List<String> self, String separator) {
+
+		return self
+			.withIndex().collect { string, index ->
+			return string.startsWith(separator) && index != 0 ? string.substring(1) : string
+		}
+			.withIndex().collect { string, index ->
+			return string.endsWith(separator) && index != self.size() ? string.substring(0, string.length() - 1) : string
+		}
+			.join(separator)
 	}
 
 	/**

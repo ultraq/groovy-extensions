@@ -46,4 +46,9 @@ class StringExtensionsTests extends Specification {
 				"turn-to-pascal-case"
 			]
 	}
+
+	def "Leaves duplicates of the separator character within existing strings alone"() {
+		expect:
+			['https://www.example.com/', '/path-to-something'].joinAndNormalize('/') == 'https://www.example.com/path-to-something'
+	}
 }
