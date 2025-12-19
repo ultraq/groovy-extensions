@@ -30,6 +30,8 @@ package nz.net.ultraq.groovy.extensions
  */
 class StringExtensions {
 
+	private static final String WORD_SPLITTER = /[ -]/
+
 	/**
 	 * The same as a standard {@code join} method, but removes any double-ups of
 	 * the separator in cases when some parts already contain it.  eg:
@@ -64,12 +66,28 @@ class StringExtensions {
 	}
 
 	/**
-	 * Convert a string from any of the supported cases to PascalCase.
+	 * Convert a string from any of the supported cases to {@code PascalCase}.
 	 */
 	static String toPascalCase(String self) {
 
-		return self.split(/[ -]/)
+		return self.split(WORD_SPLITTER)
 			.collect { part -> part.capitalize() }
 			.join()
+	}
+
+	/**
+	 * Convert a string from any of the supported cases to {@code Sentence case},
+	 * with an option to optionally capitalize each word in the sentence.
+	 */
+	static String toSentenceCase(String self, boolean capitalizeEachWord = false) {
+
+		var index = 0
+		return self.split(WORD_SPLITTER)
+			.collect { part ->
+				var result = index == 0 || capitalizeEachWord ? part.capitalize() : part
+				index++
+				return result
+			}
+			.join(' ')
 	}
 }

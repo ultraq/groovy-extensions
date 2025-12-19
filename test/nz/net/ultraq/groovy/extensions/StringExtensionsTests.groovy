@@ -37,7 +37,12 @@ class StringExtensionsTests extends Specification {
 			]
 	}
 
-	def "Convert from sentence case to PascalCase"(String input) {
+	def "Leaves duplicates of the separator character within existing strings alone"() {
+		expect:
+			['https://www.example.com/', '/path-to-something'].joinAndNormalize('/') == 'https://www.example.com/path-to-something'
+	}
+
+	def "Convert to PascalCase"(String input) {
 		expect:
 			input.toPascalCase() == "TurnToPascalCase"
 		where:
@@ -47,8 +52,22 @@ class StringExtensionsTests extends Specification {
 			]
 	}
 
-	def "Leaves duplicates of the separator character within existing strings alone"() {
+	def "Convert to Sentence case"(String input) {
 		expect:
-			['https://www.example.com/', '/path-to-something'].joinAndNormalize('/') == 'https://www.example.com/path-to-something'
+			input.toSentenceCase() == "Turn to sentence case"
+		where:
+			input << [
+				"Turn to sentence case",
+				"turn-to-sentence-case"
+			]
+	}
+	def "Convert to Sentence case (capitalized)"(String input) {
+		expect:
+			input.toSentenceCase(true) == "Turn To Sentence Case"
+		where:
+			input << [
+				"Turn to sentence case",
+				"turn-to-sentence-case"
+			]
 	}
 }
