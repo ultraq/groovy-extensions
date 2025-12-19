@@ -23,6 +23,7 @@ package nz.net.ultraq.groovy.extensions
  * supported cases:
  * <ul>
  *   <li>kebab-case</li>
+ *   <li>PascalCase</li>
  *   <li>Sentence case</li>
  * </ul>
  *
@@ -30,7 +31,7 @@ package nz.net.ultraq.groovy.extensions
  */
 class StringExtensions {
 
-	private static final String WORD_SPLITTER = /[ -]/
+	private static final String WORD_SPLITTER = /([ -]|(?=[A-Z]))/
 
 	/**
 	 * The same as a standard {@code join} method, but removes any double-ups of
@@ -66,11 +67,33 @@ class StringExtensions {
 	}
 
 	/**
+	 * Attempt to split a string into the relevant tokens so we can recombine them
+	 * in the way we want.
+	 */
+	private static String[] tokenize(String self) {
+
+		var result = self.split(/[ -]/)
+		if (result.length == 1) {
+			result = self.split(/(?=[A-Z])/)
+		}
+		return result
+	}
+
+	/**
+	 * Convert a string from any of the supported cases to {@code kebab-case}.
+	 */
+	static String toKebabCase(String self) {
+
+		return tokenize(self)
+			.collect { part -> part.toLowerCase() }
+			.join('-')
+	}
+	/**
 	 * Convert a string from any of the supported cases to {@code PascalCase}.
 	 */
 	static String toPascalCase(String self) {
 
-		return self.split(WORD_SPLITTER)
+		return tokenize(self)
 			.collect { part -> part.capitalize() }
 			.join()
 	}
@@ -82,9 +105,9 @@ class StringExtensions {
 	static String toSentenceCase(String self, boolean capitalizeEachWord = false) {
 
 		var index = 0
-		return self.split(WORD_SPLITTER)
+		return tokenize(self)
 			.collect { part ->
-				var result = index == 0 || capitalizeEachWord ? part.capitalize() : part
+				var result = index == 0 || capitalizeEachWord ? part.capitalize() : part.toLowerCase()
 				index++
 				return result
 			}

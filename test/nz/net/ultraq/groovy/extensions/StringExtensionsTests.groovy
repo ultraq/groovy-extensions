@@ -30,7 +30,7 @@ class StringExtensionsTests extends Specification {
 			input.joinAndNormalize('/') == '/part1/part2'
 		where:
 			input << [
-			  ['/part1', 'part2'],
+				['/part1', 'part2'],
 				['/part1/', 'part2'],
 				['/part1', '/part2'],
 				['/part1/', '/part2']
@@ -42,32 +42,51 @@ class StringExtensionsTests extends Specification {
 			['https://www.example.com/', '/path-to-something'].joinAndNormalize('/') == 'https://www.example.com/path-to-something'
 	}
 
-	def "Convert to PascalCase"(String input) {
+	def "Convert to kebab-case"(String input) {
 		expect:
-			input.toPascalCase() == "TurnToPascalCase"
+			input.toKebabCase() == 'turn-to-kebab-case'
 		where:
 			input << [
-				"Turn to pascal case",
-				"turn-to-pascal-case"
+				'turn-to-kebab-case',
+				'TurnToKebabCase',
+				'Turn to kebab case',
+				'Turn To Kebab Case'
+			]
+	}
+
+	def "Convert to PascalCase"(String input) {
+		expect:
+			input.toPascalCase() == 'TurnToPascalCase'
+		where:
+			input << [
+				'turn-to-pascal-case',
+				'TurnToPascalCase',
+				'Turn to pascal case',
+				'Turn To Pascal Case'
 			]
 	}
 
 	def "Convert to Sentence case"(String input) {
 		expect:
-			input.toSentenceCase() == "Turn to sentence case"
+			input.toSentenceCase() == 'Turn to sentence case'
 		where:
 			input << [
-				"Turn to sentence case",
-				"turn-to-sentence-case"
+				'turn-to-sentence-case',
+				'TurnToSentenceCase',
+				'Turn to sentence case',
+				'Turn To Sentence Case'
 			]
 	}
+
 	def "Convert to Sentence case (capitalized)"(String input) {
 		expect:
-			input.toSentenceCase(true) == "Turn To Sentence Case"
+			input.toSentenceCase(true) == 'Turn To Sentence Case'
 		where:
 			input << [
-				"Turn to sentence case",
-				"turn-to-sentence-case"
+				'turn-to-sentence-case',
+				'TurnToSentenceCase',
+				'Turn to sentence case',
+				'Turn To Sentence Case'
 			]
 	}
 }
