@@ -19,19 +19,12 @@ package nz.net.ultraq.groovy.extensions
 /**
  * Additional {@link String} methods.
  * <p>
- * For the case conversion methods, they can convert from any of the following
- * supported cases:
- * <ul>
- *   <li>kebab-case</li>
- *   <li>PascalCase</li>
- *   <li>Sentence case</li>
- * </ul>
+ * For the case conversion methods, they can convert from any of the cases for
+ * which there is a method, to any of the cases for which there is a method.
  *
  * @author Emanuel Rabina
  */
 class StringExtensions {
-
-	private static final String WORD_SPLITTER = /([ -]|(?=[A-Z]))/
 
 	/**
 	 * The same as a standard {@code join} method, but removes any double-ups of
@@ -100,17 +93,14 @@ class StringExtensions {
 
 	/**
 	 * Convert a string from any of the supported cases to {@code Sentence case},
-	 * with an option to optionally capitalize each word in the sentence.
+	 * with an option to capitalize each word in the sentence (so it becomes
+	 * {@code Sentence Case}).
 	 */
 	static String toSentenceCase(String self, boolean capitalizeEachWord = false) {
 
 		var index = 0
 		return tokenize(self)
-			.collect { part ->
-				var result = index == 0 || capitalizeEachWord ? part.capitalize() : part.toLowerCase()
-				index++
-				return result
-			}
+			.collect { part -> index++ == 0 || capitalizeEachWord ? part.capitalize() : part.toLowerCase() }
 			.join(' ')
 	}
 }
