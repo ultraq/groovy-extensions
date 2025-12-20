@@ -44,9 +44,9 @@ configure {
 		.configureVerification()
 			.withTestDirectory('test')
 			.withTestDependencies() {
-				testImplementation 'net.bytebuddy:byte-buddy:1.14.18'
-				testImplementation 'org.objenesis:objenesis:3.4'
-				testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
+				testImplementation 'org.mockito:mockito-core:5.21.0'
+				testImplementation 'org.slf4j:slf4j-simple:2.0.17'
+				testImplementation 'org.spockframework:spock-core:2.4-groovy-4.0'
 			}
 			.useJUnitJupiter()
 			.useJacoco()
