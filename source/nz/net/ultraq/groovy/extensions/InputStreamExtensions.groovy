@@ -30,11 +30,6 @@ class InputStreamExtensions {
 	/**
 	 * Convenience method for calling {@link InputStream#mark}, executing the
 	 * closure, and then calling {@link InputStream#reset} before returning.
-	 *
-	 * @param self
-	 * @param readLimit
-	 * @param closure
-	 * @return
 	 */
 	static <I extends InputStream, T> T markAndReset(I self, int readLimit,
 		@ClosureParams(value = FromString, options = "I") Closure<T> closure) {
@@ -52,10 +47,6 @@ class InputStreamExtensions {
 	/**
 	 * Ensure an input stream is a {@link BufferedInputStream}, wrapping it in one
 	 * if necessary, before invoking the usual {@code withReader} method over it.
-	 *
-	 * @param self
-	 * @param closure
-	 * @return
 	 */
 	static <T> T withBufferedReader(InputStream self,
 		@ClosureParams(value = SimpleType, options = 'java.io.BufferedReader') Closure<T> closure) {
@@ -68,10 +59,6 @@ class InputStreamExtensions {
 	/**
 	 * Ensure an input stream is a {@link BufferedInputStream}, wrapping it in one
 	 * if necessary, before invoking the usual {@code withStream} method over it.
-	 *
-	 * @param self
-	 * @param closure
-	 * @return
 	 */
 	static <T> T withBufferedStream(InputStream self,
 		@ClosureParams(value = SimpleType, options = 'java.io.BufferedInputStream') Closure<T> closure) {

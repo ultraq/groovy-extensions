@@ -49,6 +49,9 @@ class ExecutorServiceExtensions {
 	 * period of time after shutdown then there might be something worth
 	 * investigating.
 	 *
+	 * @deprecated
+	 *   Use the {@code close} method on an {@link ExecutorService} in Java 19+
+	 *   instead.
 	 * @param <T>
 	 * @param self
 	 * @param awaitValue
@@ -58,15 +61,16 @@ class ExecutorServiceExtensions {
 	 *   service itself for performing any parallel tasks.
 	 * @return The return value from the closure.
 	 */
+	@Deprecated(since = '4.0.0', forRemoval = true)
 	static <T> T executeAndShutdown(ExecutorService self, int awaitValue = 5, TimeUnit awaitUnit = TimeUnit.SECONDS,
 		@ClosureParams(value = SimpleType, options = 'java.util.concurrent.ExecutorService')
-		Closure<T> closure) {
+			Closure<T> closure) {
 
 		try {
 			return closure(self)
 		}
 		finally {
-			self.shutdownAwaitTermination(awaitValue, awaitUnit)
+			shutdownAwaitTermination(self, awaitValue, awaitUnit)
 		}
 	}
 
@@ -75,10 +79,11 @@ class ExecutorServiceExtensions {
 	 * termination.  A default value of 5 seconds is used if neither await value
 	 * is specified.
 	 *
-	 * @param self
-	 * @param awaitValue
-	 * @param awaitUnit
+	 * @deprecated
+	 *   Use the {@code close} method on an {@link ExecutorService} in Java 19+
+	 *   instead.
 	 */
+	@Deprecated(since = '4.0.0', forRemoval = true)
 	static void shutdownAwaitTermination(ExecutorService self, int awaitValue = 5, TimeUnit awaitUnit = TimeUnit.SECONDS) {
 
 		self.shutdown()

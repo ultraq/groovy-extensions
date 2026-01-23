@@ -28,10 +28,6 @@ class BufferExtensions {
 	/**
 	 * Advance the internal position of a buffer by the given amount.  Negative
 	 * values may be given to move the position backwards.
-	 *
-	 * @param self
-	 * @param n
-	 * @return The buffer.
 	 */
 	static Buffer advance(Buffer self, int n) {
 

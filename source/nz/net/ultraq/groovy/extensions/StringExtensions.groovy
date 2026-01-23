@@ -18,9 +18,9 @@ package nz.net.ultraq.groovy.extensions
 
 /**
  * Additional {@link String} methods.
- * <p>
- * For the case conversion methods, they can convert from any of the cases for
- * which there is a method, to any of the cases for which there is a method.
+ *
+ * <p>For the case conversion methods, they can convert from any of the cases
+ * for which there is a method, to any of the cases for which there is a method.
  *
  * @author Emanuel Rabina
  */
@@ -29,23 +29,23 @@ class StringExtensions {
 	/**
 	 * The same as a standard {@code join} method, but removes any double-ups of
 	 * the separator in cases when some parts already contain it.  eg:
-	 * <p>
-	 * {@code ['/part1/', '/part2'].joinAndNormalize('/') == '/part1/part2'}
-	 * <p>
-	 * Useful for things like path segments in URLs or file systems.
+	 *
+	 * <p>{@code ['/part1/', '/part2'].joinAndNormalize('/') == '/part1/part2'}
+	 *
+	 * <p>Useful for things like path segments in URLs or file systems.
 	 */
 	static String joinAndNormalize(String[] self, String separator) {
 
-		return joinAndNormalize(self.toList(), separator)
+		return joinAndNormalize(self as List<String>, separator)
 	}
 
 	/**
 	 * The same as a standard {@code join} method, but removes any double-ups of
 	 * the separator in cases when some parts already contain it.  eg:
-	 * <p>
-	 * {@code ['/part1/', '/part2'].joinAndNormalize('/') == '/part1/part2'}
-	 * <p>
-	 * Useful for things like path segments in URLs or file systems.
+	 *
+	 * <p>{@code ['/part1/', '/part2'].joinAndNormalize('/') == '/part1/part2'}
+	 *
+	 * <p>Useful for things like path segments in URLs or file systems.
 	 */
 	static String joinAndNormalize(List<String> self, String separator) {
 
