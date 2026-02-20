@@ -29,6 +29,7 @@ class MathStaticExtensions {
 	 *
 	 * @deprecated This method is part of the {@code Math} class in Java 21.
 	 */
+	@Deprecated(since = '4.0.0', forRemoval = true)
 	static int clamp(Math self, int value, int lower, int upper) {
 
 		return Math.min(Math.max(lower, value), upper)
@@ -40,6 +41,7 @@ class MathStaticExtensions {
 	 *
 	 * @deprecated This method is part of the {@code Math} class in Java 21.
 	 */
+	@Deprecated(since = '4.0.0', forRemoval = true)
 	static float clamp(Math self, float value, float lower, float upper) {
 
 		return Math.min(Math.max(lower, value), upper)
