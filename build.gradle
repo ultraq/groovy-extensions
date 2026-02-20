@@ -16,7 +16,7 @@
 
 plugins {
 	id 'idea'
-	id 'nz.net.ultraq.gradle.fluent-configuration' version '0.9.1'
+	id 'nz.net.ultraq.gradle.fluent-configuration' version '0.9.3'
 }
 
 description = 'A collection of extensions for Groovy projects that I almost wish were a part of the GDK'
@@ -37,7 +37,7 @@ configure {
 		.configureSource()
 			.withSourceDirectory('source')
 			.withDependencies() {
-				api 'org.apache.groovy:groovy:5.0.3'
+				api 'org.apache.groovy:groovy:5.0.4'
 				implementation 'org.slf4j:slf4j-api:2.0.17'
 			}
 			.expandExtensionModuleVersion()
