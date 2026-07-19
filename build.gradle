@@ -16,11 +16,11 @@
 
 plugins {
 	id 'idea'
-	id 'nz.net.ultraq.gradle.fluent-configuration' version '0.9.3'
+	id 'nz.net.ultraq.gradle.fluent-configuration' version '0.9.4'
 }
 
 description = 'A collection of extensions for Groovy projects that I almost wish were a part of the GDK'
-version = '4.0.0'
+version = '4.0.1'
 group = 'nz.net.ultraq.groovy'
 
 configure {
@@ -37,15 +37,15 @@ configure {
 		.configureSource()
 			.withSourceDirectory('source')
 			.withDependencies() {
-				api 'org.apache.groovy:groovy:5.0.4'
-				implementation 'org.slf4j:slf4j-api:2.0.17'
+				api 'org.apache.groovy:groovy:5.0.7'
+				implementation 'org.slf4j:slf4j-api:2.0.18'
 			}
 			.expandExtensionModuleVersion()
 		.configureVerification()
 			.withTestDirectory('test')
 			.withTestDependencies() {
-				testImplementation 'org.mockito:mockito-core:5.21.0'
-				testImplementation 'org.slf4j:slf4j-simple:2.0.17'
+				testImplementation 'org.mockito:mockito-core:5.23.0'
+				testImplementation 'org.slf4j:slf4j-simple:2.0.18'
 				testImplementation 'org.spockframework:spock-core:2.4-groovy-5.0'
 			}
 			.useJUnitJupiter()

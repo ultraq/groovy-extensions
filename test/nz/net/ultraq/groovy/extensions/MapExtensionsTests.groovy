@@ -1,12 +1,12 @@
-/* 
+/*
  * Copyright 2020, Emanuel Rabina (http://www.ultraq.net.nz/)
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,10 +27,10 @@ class MapExtensionsTests extends Specification {
 
 	def "Sets and returns the result on the map"() {
 		given:
-			def map = [:]
-			def key = new Object()
+			var map = [:]
+			var key = new Object()
 		when:
-			def value = map.getOrCreate(key) { ->
+			var value = map.getOrCreate(key) { ->
 				return 'Hi!'
 			}
 		then:
@@ -40,14 +40,31 @@ class MapExtensionsTests extends Specification {
 
 	def "If the key already exists, return its value"() {
 		given:
-			def key = 'key'
-			def value = 'Hello!'
-			def map = [(key): value]
+			var key = 'key'
+			var value = 'Hello!'
+			var map = [(key): value]
 		when:
-			def result = map.getOrCreate(key) { ->
+			var result = map.getOrCreate(key) { ->
 				return 'Goodbye!'
 			}
 		then:
 			result == value
+	}
+
+	def 'Falsy values are allowed to be cached'() {
+		given:
+			var map = [:]
+			var key = 'key'
+			var count = 0
+		when:
+			2.times { _ ->
+				map.getOrCreate(key) { ->
+					count++
+					return false
+				}
+			}
+		then:
+			map[key] == false
+			count == 1
 	}
 }
