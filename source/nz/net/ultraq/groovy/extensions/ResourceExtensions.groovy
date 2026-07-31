@@ -24,6 +24,15 @@ package nz.net.ultraq.groovy.extensions
 class ResourceExtensions {
 
 	/**
+	 * A shortcut to {@code ClassLoader.getResourceAsStream}, followed by reading
+	 * and returning all of the stream bytes.
+	 */
+	static byte[] getResourceAsBytes(Object self, String resourcePath) {
+
+		return getResourceAsStream(self, resourcePath).withBufferedStream { it.readAllBytes() }
+	}
+
+	/**
 	 * A shortcut to {@code new File(ClassLoader.getResource.toURI())}.
 	 */
 	static File getResourceAsFile(Object self, String resourcePath) {

@@ -25,50 +25,42 @@ import spock.lang.Specification
  */
 class ResourceExtensionsTests extends Specification {
 
+	String resourcePath = 'nz/net/ultraq/groovy/extensions/ResourceExtensionsTestsFile.txt'
+	String noResourcePath = 'path/to/nothing'
+
+	def "#getResourceAsBytes - Returns the bytes of a resource"() {
+		expect:
+			getResourceAsBytes(resourcePath) == this.class.classLoader.getResourceAsStream(resourcePath).bytes
+	}
+
 	def "#getResourceAsFile - Is a shortcut to new File(ClassLoader.getResource().toURI())"() {
-		given:
-			def resourcePath = 'nz/net/ultraq/groovy/extensions/ResourceExtensionsTestsFile.txt'
-		when:
-			def result = getResourceAsFile(resourcePath)
-		then:
-			assert result.text == new File(this.class.classLoader.getResource(resourcePath).toURI()).text
+		expect:
+			getResourceAsFile(resourcePath).text == new File(this.class.classLoader.getResource(resourcePath).toURI()).text
 	}
 
 	def "#getResourceAsFile - Throws an exception if the path leads to nothing"() {
-		given:
-			def resourcePath = 'path/to/nothing'
 		when:
-			getResourceAsFile(resourcePath)
+			getResourceAsFile(noResourcePath)
 		then:
-			def ex = thrown(IllegalArgumentException)
-			assert ex.message == "Resource not found: ${resourcePath}"
+			var ex = thrown(IllegalArgumentException)
+			assert ex.message == "Resource not found: ${noResourcePath}"
 	}
 
 	def "#getResourceAsStream - Is a shortcut to ClassLoader.getResourceAsStream"() {
-		given:
-			def resourcePath = 'nz/net/ultraq/groovy/extensions/ResourceExtensionsTestsFile.txt'
-		when:
-			def result = getResourceAsStream(resourcePath)
-		then:
-			assert result.text == this.class.classLoader.getResourceAsStream(resourcePath).text
+		expect:
+			getResourceAsStream(resourcePath).text == this.class.classLoader.getResourceAsStream(resourcePath).text
 	}
 
 	def "#getResourceAsStream - Throws an exception if the path leads to nothing"() {
-		given:
-			def resourcePath = 'path/to/nothing'
 		when:
-			getResourceAsStream(resourcePath)
+			getResourceAsStream(noResourcePath)
 		then:
-			def ex = thrown(IllegalArgumentException)
-			assert ex.message == "Resource not found: ${resourcePath}"
+			var ex = thrown(IllegalArgumentException)
+			assert ex.message == "Resource not found: ${noResourcePath}"
 	}
 
 	def "#getResourceAsText - Returns the text content of a resource"() {
-		given:
-			def resourcePath = 'nz/net/ultraq/groovy/extensions/ResourceExtensionsTestsFile.txt'
-		when:
-			def result = getResourceAsText(resourcePath)
-		then:
-			assert result == getResourceAsStream(resourcePath).withCloseable { it.text }
+		expect:
+			getResourceAsText(resourcePath) == getResourceAsStream(resourcePath).withCloseable { it.text }
 	}
 }
