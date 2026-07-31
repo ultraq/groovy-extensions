@@ -29,7 +29,7 @@ class ResourceExtensions {
 	 */
 	static byte[] getResourceAsBytes(Object self, String resourcePath) {
 
-		return getResourceAsStream(self, resourcePath).withBufferedStream { it.readAllBytes() }
+		return getResourceAsStream(self, resourcePath).withBufferedStream { it.bytes }
 	}
 
 	/**
