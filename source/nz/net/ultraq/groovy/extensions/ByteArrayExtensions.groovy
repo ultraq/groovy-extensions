@@ -25,7 +25,12 @@ class ByteArrayExtensions {
 
 	/**
 	 * Return a new array of the items in this array but in reverse order.
+	 *
+	 * @deprecated
+	 *   Groovy 5 seems to have finally fixed their {@code byte[].reverse()}
+	 *   method, so this is no longer needed.
 	 */
+	@Deprecated(since = '4.1.0', forRemoval = true)
 	static byte[] reverse(byte[] self) {
 
 		byte[] reversed = new byte[self.length]

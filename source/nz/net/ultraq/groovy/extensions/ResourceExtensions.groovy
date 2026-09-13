@@ -49,7 +49,7 @@ class ResourceExtensions {
 	 */
 	static InputStream getResourceAsStream(Object self, String resourcePath) {
 
-		def inputStream = self.class.classLoader.getResourceAsStream(resourcePath)
+		var inputStream = self.class.classLoader.getResourceAsStream(resourcePath)
 		if (inputStream) {
 			return inputStream
 		}

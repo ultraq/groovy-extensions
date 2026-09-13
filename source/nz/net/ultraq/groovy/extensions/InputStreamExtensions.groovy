@@ -36,8 +36,7 @@ class InputStreamExtensions {
 
 		try {
 			self.mark(readLimit)
-			def result = closure(self)
-			return result
+			return closure(self)
 		}
 		finally {
 			self.reset()

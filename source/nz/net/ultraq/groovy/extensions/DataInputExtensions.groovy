@@ -28,7 +28,7 @@ class DataInputExtensions {
 	 */
 	static byte[] readBytes(DataInput self, int length) {
 
-		def bytes = new byte[length]
+		var bytes = new byte[length]
 		self.readFully(bytes)
 		return bytes
 	}

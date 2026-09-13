@@ -31,7 +31,7 @@ class ObjectExtensions {
 	 * and returned to the calling code.
 	 * <pre>
 	 *   assert !myObject['someProperty']
-	 *   def result = map.getOrCreate('someProperty') { ->
+	 *   var result = map.getOrCreate('someProperty') { ->
 	 *     return 13
 	 *   }
 	 *   assert result == 13
